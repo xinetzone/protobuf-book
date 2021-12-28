@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Posts &#8212; sphinx-demo 0.1 文档</title>
+    <title>All Posts &#8212; protobuf-book 0.1 文档</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -60,7 +60,7 @@ var addUtterances = () => {
     script.src = "https://utteranc.es/client.js";
     script.async = "async";
 
-    script.setAttribute("repo", "xinetzone/sphinx-demo");
+    script.setAttribute("repo", "xinetzone/protobuf-book");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", "github-light");
     script.setAttribute("label", "💬 comment");
@@ -142,7 +142,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       <img src="_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">sphinx-demo 0.1 文档</h1>
+      <h1 class="site-logo" id="site-title">protobuf-book 0.1 文档</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -153,7 +153,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="start/index.html">
-   启动项目
+   快速上手
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -162,23 +162,18 @@ commentsRunWhenDOMLoaded(addUtterances);
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="start/nocode.html">
-     零代码写文档
+    <a class="reference internal" href="start/intro.html">
+     简介
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="start/anaconda3.html">
-     Anaconda3 安装与配置
+    <a class="reference internal" href="start/python.html">
+     Python 接口
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="start/cpp.html">
-     C/C++ 环境搭建
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="start/java.html">
-     Java 环境搭建
+    <a class="reference internal" href="start/python-generated.html">
+     Python 生成
     </a>
    </li>
   </ul>
@@ -224,7 +219,7 @@ commentsRunWhenDOMLoaded(addUtterances);
   <div>
 版权所有 © 2021 <a href="https://xinetzone.github.io/">xinetzone</a></div>
 <div>由 <a href="https://ebp.jupyterbook.org/">EBP</a> 提供技术支持</div>
-<div>语言切换<a href="/sphinx-demo/">中</a>/<a href="/sphinx-demo/en">英</a></div>
+<div>语言切换<a href="/protobuf-book/">中</a>/<a href="/protobuf-book/en">英</a></div>
 
 </div>
 
@@ -259,11 +254,11 @@ commentsRunWhenDOMLoaded(addUtterances);
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/xinetzone/sphinx-demo"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/xinetzone/protobuf-book"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/xinetzone/sphinx-demo/issues/new?title=Issue%20on%20page%20%2Fposts.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/xinetzone/protobuf-book/issues/new?title=Issue%20on%20page%20%2Fposts.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -296,81 +291,7 @@ commentsRunWhenDOMLoaded(addUtterances);
   <h1>
      All  Posts 
   </h1>
-   
-
-  <div class="section">
-    <h2>
-      <a href="start/anaconda3.html"
-        >Anaconda3 安装与配置</a
-      >
-    </h2>
-
-    <ul class="ablog-archive">
-      <li>
-         <i class="fa fa-calendar"></i> Wed Nov  3 23:00:00 2021 
-      </li>
-       
-<li id="author">
-  <span
-    ><i class="fa-fw fa fa-user"></i></span
-  >
-   
-  <a href="posts/author/%E5%88%98%E6%96%B0%E4%BC%9F.html">刘新伟</a>  
-</li>
-  
-<li id="language">
-  <span
-    ><i class="fa-fw fa fa-language"></i></span
-  >
-   
-  <a href="posts/language/chinese.html">Chinese</a>  
-</li>
- 
-<li id="category">
-  <span
-    ><i class="fa-fw fa fa-folder-open"></i></span
-  >
-   
-  <a href="posts/category/python.html">Python</a>  
-</li>
- 
-<li id="tags">
-  <span
-    ><i
-      class="fa-fw fa fa-tag"
-    ></i
-    ></span
-  >
-   
-  <a href="posts/tag/basic.html">basic</a>  
-</li>
- 
-    </ul>
-    <p>首先，观看视频：</p>
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "xinetzone/sphinx-demo",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            kernelName: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
-    <p><a href="start/anaconda3.html">阅读更多 ...</a></p>
-    <hr />
-  </div>
-   
+    
 </div>
 
               </div>
