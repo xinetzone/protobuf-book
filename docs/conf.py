@@ -111,7 +111,7 @@ extlinks = {
 intersphinx_mapping = {
     'python': ('https://daobook.github.io/cpython/', None),
     'sphinx': ('https://daobook.github.io/sphinx/', None),
-    'peps': ('https://daobook.github.io/peps', None),
+    'protobuf': ('https://daobook.github.io/protobuf', None),
 }
 
 # Add any paths that contain templates here, relative to this directory.
