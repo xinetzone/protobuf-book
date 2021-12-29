@@ -149,7 +149,7 @@ Enums 被元类扩展为一组具有整数值的符号常数。因此，例如�
 - `CopyFrom(other_msg)`：用给定的消息的值覆盖消息。
 - `Clear()`：将所有的元素清除到空状态。
 
-这些方法实现了 `Message` 接口。欲了解更多信息，请参见 `Message` 的 [完整 API 文档](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)。
+这些方法实现了 `Message` 接口。欲了解更多信息，请参见 {class}`Message 接口 <google.protobuf.message.Message>`。
 
 ### 解析和序列化
 
@@ -158,7 +158,7 @@ Enums 被元类扩展为一组具有整数值的符号常数。因此，例如�
 - `SerializeToString()`：将消息序列化，并将其作为字符串返回。注意，字节是二进制的，而不是文本；我们只使用 `str` 类型作为一个方便的容器。
 - `ParseFromString(data)`：从给定的字符串中解析出一条信息。
 
-这些只是为解析和序列化提供的几个选项。同样，完整的清单请参见 [`Message` API 参考](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)。
+这些只是为解析和序列化提供的几个选项。同样，完整的清单请参见 {class}`Message 接口 <google.protobuf.message.Message>`。
 
 ```{admonition} 协议缓冲区和面向对象的设计
 :class: warning
@@ -293,4 +293,4 @@ ListPeople(address_book)
 
 协议消息类提供的一个关键功能是反射（reflection）。你可以遍历一个消息的字段并操作它们的值，而不需要针对任何特定的消息类型编写代码。使用反射的一个非常有用的方法是将协议消息转换为其他编码，如 XML 或 JSON。反射的一个更高级的用途可能是寻找同一类型的两个消息之间的差异，或者开发一种 "协议消息的正则表达式"，在其中你可以编写与某些消息内容相匹配的表达式。如果你发挥你的想象力，就有可能将协议缓冲区应用到比你最初预期的更广泛的问题上！
 
-反射是作为 [Message 接口](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message) 的一部分提供的。
+反射是作为 {class}`Message 接口 <google.protobuf.message.Message>` 的一部分提供的。

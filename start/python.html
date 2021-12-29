@@ -527,7 +527,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li><p><code class="docutils literal notranslate"><span class="pre">CopyFrom(other_msg)</span></code>：用给定的消息的值覆盖消息。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Clear()</span></code>：将所有的元素清除到空状态。</p></li>
 </ul>
-<p>这些方法实现了 <code class="docutils literal notranslate"><span class="pre">Message</span></code> 接口。欲了解更多信息，请参见 <code class="docutils literal notranslate"><span class="pre">Message</span></code> 的 <a class="reference external" href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message">完整 API 文档</a>。</p>
+<p>这些方法实现了 <code class="docutils literal notranslate"><span class="pre">Message</span></code> 接口。欲了解更多信息，请参见 <a class="reference external" href="https://daobook.github.io/protobuf/api/python/google/protobuf/message.html#google.protobuf.message.Message" title="(在 protobuf)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span> <span class="pre">接口</span></code></a>。</p>
 </div>
 <div class="section" id="id7">
 <h3>解析和序列化<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
@@ -536,7 +536,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li><p><code class="docutils literal notranslate"><span class="pre">SerializeToString()</span></code>：将消息序列化，并将其作为字符串返回。注意，字节是二进制的，而不是文本；我们只使用 <code class="docutils literal notranslate"><span class="pre">str</span></code> 类型作为一个方便的容器。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ParseFromString(data)</span></code>：从给定的字符串中解析出一条信息。</p></li>
 </ul>
-<p>这些只是为解析和序列化提供的几个选项。同样，完整的清单请参见 <a class="reference external" href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message"><code class="docutils literal notranslate"><span class="pre">Message</span></code> API 参考</a>。</p>
+<p>这些只是为解析和序列化提供的几个选项。同样，完整的清单请参见 <a class="reference external" href="https://daobook.github.io/protobuf/api/python/google/protobuf/message.html#google.protobuf.message.Message" title="(在 protobuf)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span> <span class="pre">接口</span></code></a>。</p>
 <div class="warning admonition">
 <p class="admonition-title">协议缓冲区和面向对象的设计</p>
 <p>协议缓冲区类基本上是 dumb 数据持有者（像 C 语言中的结构）；它们在对象模型中不是很好的一等公民。如果你想在生成的类中添加更丰富的行为，最好的方法是将生成的协议缓冲器类包裹在一个特定的应用类中。如果你不能控制 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的设计，包裹协议缓冲区也是一个好主意（比如，你从另一个项目中重复使用）。在这种情况下，你可以使用封装类来制作一个更适合你的应用程序的独特环境的接口：隐藏一些数据和方法，公开方便的函数，等等。你不应该通过继承来给生成的类添加行为。这将破坏内部机制，而且无论如何都不是面向对象的好做法。</p>
@@ -664,7 +664,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <h2>高级用法<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
 <p>协议缓冲区的用途超出了简单的访问器和序列化。一定要探索 <a class="reference external" href="https://googleapis.dev/python/protobuf/latest/">Python API 参考</a>，看看你还能用它们做什么。</p>
 <p>协议消息类提供的一个关键功能是反射（reflection）。你可以遍历一个消息的字段并操作它们的值，而不需要针对任何特定的消息类型编写代码。使用反射的一个非常有用的方法是将协议消息转换为其他编码，如 XML 或 JSON。反射的一个更高级的用途可能是寻找同一类型的两个消息之间的差异，或者开发一种 “协议消息的正则表达式”，在其中你可以编写与某些消息内容相匹配的表达式。如果你发挥你的想象力，就有可能将协议缓冲区应用到比你最初预期的更广泛的问题上！</p>
-<p>反射是作为 <a class="reference external" href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message">Message 接口</a> 的一部分提供的。</p>
+<p>反射是作为 <a class="reference external" href="https://daobook.github.io/protobuf/api/python/google/protobuf/message.html#google.protobuf.message.Message" title="(在 protobuf)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span> <span class="pre">接口</span></code></a> 的一部分提供的。</p>
 </div>
 </div>
 
