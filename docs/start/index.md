@@ -4,8 +4,10 @@
 :maxdepth: 3
 
 intro
-python
-python-generated
+proto3
+proto2
+encoding
+techniques
 ```
 
 参考：{daobook}`protobuf`。
