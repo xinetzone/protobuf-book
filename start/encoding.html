@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>关于 &#8212; protobuf-book 0.1 文档</title>
+    <title>编码 &#8212; protobuf-book 0.1 文档</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -89,8 +89,8 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="shortcut icon" href="../_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="行为准则" href="../CODE_OF_CONDUCT.html" />
-    <link rel="prev" title="C++ 接口" href="../tutorials/cpp.html" /> 
+    <link rel="next" title="技术" href="techniques.html" />
+    <link rel="prev" title="概述" href="proto2.html" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh_CN">
     
@@ -160,38 +160,38 @@ commentsRunWhenDOMLoaded(addUtterances);
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../start/index.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
    快速上手
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../start/intro.html">
+    <a class="reference internal" href="intro.html">
      简介
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../start/proto3.html">
+    <a class="reference internal" href="proto3.html">
      proto3
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../start/proto2.html">
+    <a class="reference internal" href="proto2.html">
      概述
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../start/encoding.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      编码
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../start/techniques.html">
+    <a class="reference internal" href="techniques.html">
      技术
     </a>
    </li>
@@ -224,11 +224,11 @@ commentsRunWhenDOMLoaded(addUtterances);
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../about/index.html">
    关于
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
@@ -301,7 +301,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/about/index.md.txt"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/start/encoding.md.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -321,10 +321,10 @@ commentsRunWhenDOMLoaded(addUtterances);
                 data-toggle="tooltip" data-placement="left" title="源库"><i
                     class="fab fa-github"></i>资料库</button></a>
         <a class="issues-button"
-            href="https://github.com/xinetzone/protobuf-book/issues/new?title=Issue%20on%20page%20%2Fabout/index.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/xinetzone/protobuf-book/issues/new?title=Issue%20on%20page%20%2Fstart/encoding.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
-        <a class="edit-button" href="https://github.com/xinetzone/protobuf-book/edit/main/docs/about/index.md"><button
+        <a class="edit-button" href="https://github.com/xinetzone/protobuf-book/edit/main/docs/start/encoding.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -344,23 +344,111 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 导航
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   简单消息
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-128-varints">
+   Base 128 Varints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   消息结构
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
     <!-- Table of contents that is only displayed when printing the page -->
     <div id="jb-print-docs-body" class="onlyprint">
-        <h1>关于</h1>
+        <h1>编码</h1>
         <!-- Table of contents -->
         <div id="print-main-content" class="row">
             <div class="col-12 col-md-12 pl-md-5 pr-md-5">
             <div id="jb-print-toc">
                 
+                <div>
+                    <h2> 导航 </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   简单消息
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-128-varints">
+   Base 128 Varints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   消息结构
+  </a>
+ </li>
+</ul>
+
+                </nav>
             </div>
             
               <div>
                  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>关于<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<div class="toctree-wrapper compound">
+<h1>编码<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>参考：<a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding">消息二进制格式</a></p>
+<p>本文档描述了协议缓冲区消息的二进制 wire 格式。你不需要了解这个来在你的应用程序中使用协议缓冲区，但是了解不同的协议缓冲区格式如何影响你的编码信息的大小是非常有用的。</p>
+<div class="section" id="id2">
+<h2>简单消息<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>假设你有以下非常简单的消息定义。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Test1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">optional</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在一个应用程序中，你创建了一个 <code class="docutils literal notranslate"><span class="pre">Test1</span></code> 消息并将 <code class="docutils literal notranslate"><span class="pre">a</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">150</span></code>。然后你将消息序列化到一个输出流。如果你能够检查编码后的消息，你会看到三个字节。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">08</span> <span class="mi">96</span> <span class="mi">01</span>
+</pre></div>
+</div>
+<p>到目前为止，这么小的数字 - 但它意味着什么呢？继续阅读…</p>
+</div>
+<div class="section" id="base-128-varints">
+<h2>Base 128 Varints<a class="headerlink" href="#base-128-varints" title="永久链接至标题">¶</a></h2>
+<p>为了理解你的简单协议缓冲区编码，你首先需要理解 varints。Varints 是一种使用一个或多个字节来序列化整数的方法。较小的数字需要较少的字节数。</p>
+<p>除了最后一个字节外，varint中的每个字节都设置了最有意义的位（most significant bit，msb）—— 这表明还有更多的字节要来。每个字节的低 7 位用于存储数字的二补表示，以 7 位为一组，最小有效位在前。</p>
+<p>因此，例如，这里是数字 1 - 这是一个单字节，所以 msb 没有设置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0000</span> <span class="mi">0001</span>
+</pre></div>
+</div>
+<p>而这里是 300 ——这有点复杂：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1010</span> <span class="mi">1100</span> <span class="mi">0000</span> <span class="mi">0010</span>
+</pre></div>
+</div>
+<p>你如何计算出这是 300 呢？首先，你去掉每个字节的 msb，因为这只是为了告诉我们是否已经到达了数字的末尾（正如你所看到的，它被设置在第一个字节，因为 varint 中不止一个字节）。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 1010 1100 0000 0010
+→ 010 1100  000 0010
+</pre></div>
+</div>
+<p>你把两组 7 位倒过来，因为正如你所记得的，VARINTS 存储数字时，先存储最不重要的一组。然后你把它们连接起来，得到你的最终值。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>000 0010  010 1100
+→  000 0010 ++ 010 1100
+→  100101100
+→  256 + 32 + 8 + 4 = 300
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>消息结构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 
@@ -377,7 +465,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./about"
+            path: "./start"
         },
         predefinedOutput: true
     }
@@ -397,8 +485,50 @@ commentsRunWhenDOMLoaded(addUtterances);
         
               <div>
                  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>关于<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<div class="toctree-wrapper compound">
+<h1>编码<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>参考：<a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding">消息二进制格式</a></p>
+<p>本文档描述了协议缓冲区消息的二进制 wire 格式。你不需要了解这个来在你的应用程序中使用协议缓冲区，但是了解不同的协议缓冲区格式如何影响你的编码信息的大小是非常有用的。</p>
+<div class="section" id="id2">
+<h2>简单消息<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>假设你有以下非常简单的消息定义。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Test1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">optional</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在一个应用程序中，你创建了一个 <code class="docutils literal notranslate"><span class="pre">Test1</span></code> 消息并将 <code class="docutils literal notranslate"><span class="pre">a</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">150</span></code>。然后你将消息序列化到一个输出流。如果你能够检查编码后的消息，你会看到三个字节。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">08</span> <span class="mi">96</span> <span class="mi">01</span>
+</pre></div>
+</div>
+<p>到目前为止，这么小的数字 - 但它意味着什么呢？继续阅读…</p>
+</div>
+<div class="section" id="base-128-varints">
+<h2>Base 128 Varints<a class="headerlink" href="#base-128-varints" title="永久链接至标题">¶</a></h2>
+<p>为了理解你的简单协议缓冲区编码，你首先需要理解 varints。Varints 是一种使用一个或多个字节来序列化整数的方法。较小的数字需要较少的字节数。</p>
+<p>除了最后一个字节外，varint中的每个字节都设置了最有意义的位（most significant bit，msb）—— 这表明还有更多的字节要来。每个字节的低 7 位用于存储数字的二补表示，以 7 位为一组，最小有效位在前。</p>
+<p>因此，例如，这里是数字 1 - 这是一个单字节，所以 msb 没有设置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0000</span> <span class="mi">0001</span>
+</pre></div>
+</div>
+<p>而这里是 300 ——这有点复杂：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1010</span> <span class="mi">1100</span> <span class="mi">0000</span> <span class="mi">0010</span>
+</pre></div>
+</div>
+<p>你如何计算出这是 300 呢？首先，你去掉每个字节的 msb，因为这只是为了告诉我们是否已经到达了数字的末尾（正如你所看到的，它被设置在第一个字节，因为 varint 中不止一个字节）。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 1010 1100 0000 0010
+→ 010 1100  000 0010
+</pre></div>
+</div>
+<p>你把两组 7 位倒过来，因为正如你所记得的，VARINTS 存储数字时，先存储最不重要的一组。然后你把它们连接起来，得到你的最终值。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>000 0010  010 1100
+→  000 0010 ++ 010 1100
+→  100101100
+→  256 + 32 + 8 + 4 = 300
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>消息结构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 
@@ -415,7 +545,7 @@ commentsRunWhenDOMLoaded(addUtterances);
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./about"
+            path: "./start"
         },
         predefinedOutput: true
     }
@@ -430,17 +560,17 @@ commentsRunWhenDOMLoaded(addUtterances);
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../tutorials/cpp.html" title="上一页 页">
+    <a class='left-prev' id="prev-link" href="proto2.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">上一页</p>
-            <p class="prev-next-title">C++ 接口</p>
+            <p class="prev-next-title">概述</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../CODE_OF_CONDUCT.html" title="下一页 页">
+    <a class='right-next' id="next-link" href="techniques.html" title="下一页 页">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">行为准则</p>
+        <p class="prev-next-title">技术</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

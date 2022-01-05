@@ -1,0 +1,1886 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>proto3 &#8212; protobuf-book 0.1 文档</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/default.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "xinetzone/protobuf-book");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../_static/translations.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".cell"
+        const thebe_selector_input = ".cell_input div.highlight"
+        const thebe_selector_output = ".cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="shortcut icon" href="../_static/page-logo.jfif"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="概述" href="proto2.html" />
+    <link rel="prev" title="简介" href="intro.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+     
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../posts/atom.xml"
+  title="Blog"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">protobuf-book 0.1 文档</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索文档..." aria-label="搜索文档..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   快速上手
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro.html">
+     简介
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     proto3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="proto2.html">
+     概述
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encoding.html">
+     编码
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="techniques.html">
+     技术
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tutorials/index.html">
+   教程
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tutorials/python.html">
+     Python 接口
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tutorials/python-generated.html">
+     Python 生成
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tutorials/cpp.html">
+     C++ 接口
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../about/index.html">
+   关于
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CODE_OF_CONDUCT.html">
+     行为准则
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CONTRIBUTING.html">
+     贡献
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../SECURITY.html">
+     安全策略
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../CHANGELOG.html">
+     变更日志
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div>
+版权所有 © 2021 <a href="https://xinetzone.github.io/">xinetzone</a></div>
+<div>由 <a href="https://ebp.jupyterbook.org/">EBP</a> 提供技术支持</div>
+<div>语言切换<a href="/protobuf-book/">中</a>/<a href="/protobuf-book/en">英</a></div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="切换导航" aria-controls="site-navigation"
+                title="切换导航" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="下载此页面"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/start/proto3.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="列印成PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/xinetzone/protobuf-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="源库"><i
+                    class="fab fa-github"></i>资料库</button></a>
+        <a class="issues-button"
+            href="https://github.com/xinetzone/protobuf-book/issues/new?title=Issue%20on%20page%20%2Fstart/proto3.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
+        <a class="edit-button" href="https://github.com/xinetzone/protobuf-book/edit/main/docs/start/proto3.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="编辑这个页面"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全屏模式"
+        title="全屏模式"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 导航
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   定义消息类型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     指定字段类型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     分配字段编号
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     指定字段规则
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     添加更多信息类型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     添加注释
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     保留字段
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proto">
+     从你的
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .proto
+      </span>
+     </code>
+     中生成了什么？
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalar">
+   标量值类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   可选字段和默认值
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enum">
+   枚举
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   使用其他消息类型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     导入定义
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proto2">
+     使用 proto2 消息类型
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   嵌套类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updating">
+   更新消息类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   未知字段
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#any">
+   Any
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#oneof">
+   Oneof
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     使用 Oneof
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     Oneof 特征
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     向后兼容的问题
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maps">
+   Maps
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#map">
+     map 特征
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id20">
+     向后兼容
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   包
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id22">
+     包和名称解析
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id23">
+   定义服务
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id24">
+   选项
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id25">
+   生成你的类
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>proto3</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> 导航 </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   定义消息类型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     指定字段类型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     分配字段编号
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     指定字段规则
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     添加更多信息类型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     添加注释
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     保留字段
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proto">
+     从你的
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .proto
+      </span>
+     </code>
+     中生成了什么？
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scalar">
+   标量值类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   可选字段和默认值
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enum">
+   枚举
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   使用其他消息类型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     导入定义
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proto2">
+     使用 proto2 消息类型
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   嵌套类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updating">
+   更新消息类型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   未知字段
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#any">
+   Any
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#oneof">
+   Oneof
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     使用 Oneof
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     Oneof 特征
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     向后兼容的问题
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maps">
+   Maps
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#map">
+     map 特征
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id20">
+     向后兼容
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   包
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id22">
+     包和名称解析
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id23">
+   定义服务
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id24">
+   选项
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id25">
+   生成你的类
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                 <div class="tex2jax_ignore mathjax_ignore section" id="proto3">
+<h1>proto3<a class="headerlink" href="#proto3" title="永久链接至标题">¶</a></h1>
+<p>参阅 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/proto3">Proto3 语言指南</a></p>
+<p>本指南描述了如何使用协议缓冲区语言来构造你的协议缓冲区数据，包括 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的语法和如何从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件生成数据访问类。它涵盖了协议缓冲区语言的 proto3 版本。</p>
+<div class="section" id="id1">
+<h2>定义消息类型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>首先让我们看一个非常简单的例子。假设你想定义一个搜索请求的消息格式，每个搜索请求都有一个查询字符串，你感兴趣的特定结果页面，以及每页的结果数量。这里是你用来定义消息类型的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>文件的第一行指定你使用的是 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 语法：如果你不这样做，协议缓冲区编译器会认为你使用的是 <code class="docutils literal notranslate"><span class="pre">proto2</span></code>。这必须是文件中第一个非空的、非注释的行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 消息定义指定了三个字段（名称/值对），每一个字段代表你想在这种类型的消息中包含的数据。每个字段都有一个名称和一个类型。</p></li>
+</ul>
+<div class="section" id="id2">
+<h3>指定字段类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>在上面的例子中，所有的字段都是 <a class="reference external" href="#scalar">标量类型</a>：两个整数（<code class="docutils literal notranslate"><span class="pre">page_number</span></code> 和 <code class="docutils literal notranslate"><span class="pre">result_per_page</span></code>）和一个字符串（<code class="docutils literal notranslate"><span class="pre">query</span></code>）。然而，你也可以为你的字段指定复合类型，包括枚举和其他消息类型。</p>
+</div>
+<div class="section" id="id3">
+<h3>分配字段编号<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>正如你所看到的，消息定义中的每个字段都有一个 <strong>唯一的编号</strong>。这些数字用于识别你的 <a class="reference internal" href="encoding.html"><span class="doc std std-doc">消息二进制格式</span></a> 中的字段，一旦你的消息类型被使用，就不应该改变。范围在 1 到 15 的字段编号需要一个字节来编码，包括字段编号和字段的类型（你可以在 <a class="reference external" href="encoding#structure">协议缓冲区编码</a> 中找到更多的信息）。16 到 2047 范围内的字段号需要两个字节。所以你应该把字段号 1 到 15 保留给非常频繁出现的消息元素。记住要为将来可能增加的频繁出现的元素留出一些空间。</p>
+<p>你可以指定最小的字段号是 <span class="math notranslate nohighlight">\(1\)</span>，最大的是 <span class="math notranslate nohighlight">\(2^{29}-1\)</span>，即 <span class="math notranslate nohighlight">\(536\,870\,911\)</span>。你也不能使用 19000 到 19999（<code class="docutils literal notranslate"><span class="pre">FieldDescriptor::kFirstReservedNumber</span></code> 到<code class="docutils literal notranslate"><span class="pre">FieldDescriptor::kLastReservedNumber</span></code>）这些数字，因为它们是为协议缓冲区实现保留的——如果你在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中使用这些保留数字之一，协议缓冲区编译器会抱怨。同样地，你也不能使用任何先前 <code class="docutils literal notranslate"><span class="pre">reserved</span></code> 字段编号。</p>
+</div>
+<div class="section" id="id4">
+<h3>指定字段规则<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>你指定消息字段是以下之一：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">singular</span></code>：一个格式良好的消息可以有零或一个这个字段（但不能超过一个）。而这是 proto3 语法的默认字段规则。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repeated</span></code>：这个字段可以在一条格式良好的信息中重复任何次数（包括零）。重复值的顺序将被保留。</p></li>
+</ul>
+<p>在 proto3 中，标量数字类型的重复字段默认使用 <code class="docutils literal notranslate"><span class="pre">packed</span></code> 编码。</p>
+<p>你可以在 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding#packed">协议缓冲区编码</a> 中找到更多关于 <code class="docutils literal notranslate"><span class="pre">packed</span></code> 编码的信息。</p>
+</div>
+<div class="section" id="id5">
+<h3>添加更多信息类型<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>多个消息类型可以在一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义。如果你要定义多个相关的消息，这很有用——因此，例如，如果你想定义与你的 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息类型相对应的回复消息格式，你可以把它添加到同一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">组合消息导致臃肿</p>
+<p>虽然在一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中可以定义多种消息类型（如消息、枚举和服务），但如果在一个文件中定义大量具有不同依赖性的消息，也会导致依赖性臃肿。建议在每个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中包含尽可能少的消息类型。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>添加注释<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>要给你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件添加注释，请使用 C/C++ 风格的 <code class="docutils literal notranslate"><span class="pre">//</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">...</span> <span class="pre">*/</span></code> 语法。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="cm">/* SearchRequest represents a search query, with pagination options to</span>
+<span class="cm"> * indicate which results to include in the response. */</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// Which page number do we want?</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">  </span><span class="c1">// Number of results to return per page.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>保留字段<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>如果你通过完全删除一个字段来更新一个消息类型，或者把它注释掉，那么未来的用户在对该类型进行自己的更新时可以重复使用这个字段的编号。如果他们后来加载同一 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的旧版本，这可能会导致严重的问题，包括数据损坏、隐私错误等等。确保这种情况不会发生的一个方法是指定你删除的字段的字段号（和/或名称，这也会给 JSON 序列化带来问题）被保留。如果将来有任何用户试图使用这些字段标识符，协议缓冲区编译器会抱怨。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">reserved</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
+<span class="w">  </span><span class="k">reserved</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>注意，你不能在同一 <code class="docutils literal notranslate"><span class="pre">reserved</span></code> 语句中混合使用字段名和字段号。</p>
+</div>
+<div class="section" id="proto">
+<h3>从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成了什么？<a class="headerlink" href="#proto" title="永久链接至标题">¶</a></h3>
+<p>当你在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器时，编译器会用你选择的语言生成你需要的代码，以处理你在文件中描述的消息类型，包括获取和设置字段值，将你的消息序列化到输出流中，并从输入流中解析你的消息。</p>
+<ul class="simple">
+<li><p>对于 C++，编译器从每个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成一个 <code class="docutils literal notranslate"><span class="pre">.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.cc</span></code> 文件，为文件中描述的每个消息类型生成一个类。</p></li>
+<li><p>对于 Java，编译器为每个消息类型生成一个 <code class="docutils literal notranslate"><span class="pre">.java</span></code> 文件，以及用于创建消息类实例的特殊 Builder 类。</p></li>
+<li><p>Python 有点不同-——Python 编译器在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成一个带有每个消息类型的静态描述符的模块，然后与元类一起使用，在运行时创建必要的 Python 数据访问类。</p></li>
+<li><p>对于 Go 来说，编译器会生成一个 <code class="docutils literal notranslate"><span class="pre">.pb.go</span></code> 文件，为你文件中的每个消息类型提供一个类型。</p></li>
+</ul>
+<p>你可以按照你所选择的语言的教程来了解更多关于使用每种语言的 API 的信息。关于更多的 API 细节，请看相关的 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">API 参考资料</a>。</p>
+</div>
+</div>
+<div class="section" id="scalar">
+<span id="id8"></span><h2>标量值类型<a class="headerlink" href="#scalar" title="永久链接至标题">¶</a></h2>
+<p>一个标量消息字段可以有以下类型之一：该表显示了在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中指定的类型，以及自动生成的类中的相应类型。</p>
+<p><img alt="" src="../_images/type.png" /></p>
+</div>
+<div class="section" id="id9">
+<h2>可选字段和默认值<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>如上所述，消息描述中的元素可以被标记为 <code class="docutils literal notranslate"><span class="pre">optional</span></code>。一个格式良好的消息可能包含也可能不包含可选元素。当一条消息被解析时，如果它不包含一个可选元素，解析对象中的相应字段就会被设置为该字段的默认值。默认值可以作为消息描述的一部分来指定。例如，假设你想为 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 的 <code class="docutils literal notranslate"><span class="pre">result_per_page</span></code> 值提供一个 10 的默认值。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">optional</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>如果没有为一个可选元素指定默认值，则会使用一个特定类型的默认值：对于字符串，默认值是空字符串。对于字节，默认值是空的字节字符串。对于 Bools，默认值是false。对于数字类型，默认值是 0。对于枚举，默认值是枚举的类型定义中列出的第一个值。这意味着在向枚举值列表的开头添加一个值时必须小心。关于如何安全地改变定义的指南，请参见 <a class="reference external" href="#updating">更新消息类型</a> 部分。</p>
+</div>
+<div class="section" id="enum">
+<span id="id10"></span><h2>枚举<a class="headerlink" href="#enum" title="永久链接至标题">¶</a></h2>
+<p>当你定义一个消息类型时，你可能希望它的一个字段只具有预定义的值列表中的一个。例如，假设你想为每个 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 添加一个 <code class="docutils literal notranslate"><span class="pre">corpus</span></code> 字段，语料库可以是<code class="docutils literal notranslate"><span class="pre">UNIVERSAL</span></code>、<code class="docutils literal notranslate"><span class="pre">WEB</span></code>、<code class="docutils literal notranslate"><span class="pre">IMAGES</span></code>、<code class="docutils literal notranslate"><span class="pre">LOCAL</span></code>、<code class="docutils literal notranslate"><span class="pre">NEWS</span></code>、<code class="docutils literal notranslate"><span class="pre">PRODUCTS</span></code> 或 <code class="docutils literal notranslate"><span class="pre">VIDEO</span></code>。你可以通过在你的消息定义中添加一个 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 来实现这个目的：一个具有 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 类型的字段只能有一组指定的常数作为它的值（如果你试图提供一个不同的值，解析器会把它当作一个未知的字段）。在下面的例子中，我们添加了一个名为 <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 的 <code class="docutils literal notranslate"><span class="pre">enum</span></code>，其中包含所有可能的值，还有一个 <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 类型的字段。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">Corpus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">UNIVERSAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">WEB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="na">IMAGES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="na">LOCAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="na">NEWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="na">PRODUCTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="na">VIDEO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Corpus</span><span class="w"> </span><span class="na">corpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>正如你所看到的，<code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 枚举的第一个常量映射为零：每个枚举定义必须包含一个映射为零的常量作为其第一个元素。这是因为：</p>
+<ul class="simple">
+<li><p>必须有一个零值，这样我们就可以用 0 作为数字的默认值。</p></li>
+<li><p>零值需要是第一个元素，以便与 proto2 语义兼容，在 proto2 中第一个枚举值总是默认值。</p></li>
+</ul>
+<p>你可以通过给不同的枚举常量分配相同的值来定义别名。要做到这一点，你需要将 <code class="docutils literal notranslate"><span class="pre">allow_alias</span></code> 选项设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code>，否则当发现别名时，协议编译器会产生错误信息。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">MyMessage1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">EnumAllowingAlias</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">option</span><span class="w"> </span><span class="na">allow_alias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="na">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">STARTED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="na">RUNNING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">message</span><span class="w"> </span><span class="nc">MyMessage2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">EnumNotAllowingAlias</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">STARTED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>枚举器常量必须在 32 位整数的范围内。由于枚举值在 wire 上使用 <code class="docutils literal notranslate"><span class="pre">varint</span></code> 编码，负值的效率很低，因此不推荐使用。你可以在一个消息定义中定义枚举，就像上面的例子一样，也可以在外面定义——这些枚举可以在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中的任何消息定义中重复使用。你也可以使用语法 <code class="docutils literal notranslate"><span class="pre">_MessageType_._EnumType_</span></code>，将一条消息中声明的枚举类型作为另一条消息中的字段类型。</p>
+<p>当你在一个使用枚举的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器时，生成的代码对于 Java 或 C++ 将有一个相应的枚举，或者对于 Python 有一个特殊的 <code class="docutils literal notranslate"><span class="pre">EnumDescriptor</span></code> 类，用来在运行时生成的类中创建一组具有整数值的符号常量。</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>生成的代码可能会受到特定语言对枚举器数量的限制（一种语言低至数千）。请查看你计划使用的语言的限制。</p>
+</div>
+<p>关于如何在你的应用程序中使用消息枚举的更多信息，请参阅你 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">所选语言的生成代码</a> 指南。</p>
+</div>
+<div class="section" id="id11">
+<h2>使用其他消息类型<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>你可以使用其他消息类型作为字段类型。例如，假设你想在每个 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息中包含结果消息——要做到这一点，你可以在同一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中定义一个结果消息类型，然后在 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 中指定一个结果类型的字段。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="na">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">snippets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id12">
+<h3>导入定义<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>在上面的例子中，<code class="docutils literal notranslate"><span class="pre">Result</span></code> 消息类型与 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 定义在同一个文件中——如果你想用作字段类型的消息类型已经在另一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义了呢？</p>
+<p>你可以通过导入来使用其他 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的定义。要导入另一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的定义，你要在文件的顶部添加一个导入语句。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="s">&quot;myproject/other_protos.proto&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>默认情况下，你只能使用直接导入的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的定义。然而，有时你可能需要将一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件移动到一个新的位置。与其直接移动 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件并在一次更改中更新所有的调用站点，你可以在旧的位置放一个占位符 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件，使用 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 概念将所有的导入转到新的位置。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>请注意，公共导入功能在 Java 中是不可用的。</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 依赖关系可以被任何导入包含 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 语句的 <code class="docutils literal notranslate"><span class="pre">proto</span></code> 的代码所过渡依赖。比如说：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// new.proto</span>
+<span class="c1">// All definitions are moved here</span>
+</pre></div>
+</div>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// old.proto</span>
+<span class="c1">// This is the proto that all clients are importing.</span>
+<span class="k">import</span><span class="w"> </span><span class="n">public</span><span class="w"> </span><span class="s">&quot;new.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s">&quot;other.proto&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// client.proto</span>
+<span class="k">import</span><span class="w"> </span><span class="s">&quot;old.proto&quot;</span><span class="p">;</span>
+<span class="c1">// You use definitions from old.proto and new.proto, but not other.proto</span>
+</pre></div>
+</div>
+<p>协议编译器在协议编译器命令行上使用 <code class="docutils literal notranslate"><span class="pre">-I/--proto_path</span></code> 标志指定的一组目录中搜索导入的文件。如果没有给出标志，它就在编译器被调用的目录中寻找。一般来说，你应该将 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 标志设置为项目的根目录，并对所有导入文件使用完全合格的名称。</p>
+</div>
+<div class="section" id="proto2">
+<h3>使用 proto2 消息类型<a class="headerlink" href="#proto2" title="永久链接至标题">¶</a></h3>
+<p>可以导入 proto2 消息类型并在你的 proto3 消息中使用它们，反之亦然。然而，proto2 的枚举不能用于 proto3 的语法。</p>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>嵌套类型<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<p>你可以在其他消息类型中定义和使用消息类型，就像下面的例子一样：这里，<code class="docutils literal notranslate"><span class="pre">Result</span></code> 消息被定义在 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息中。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">repeated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">snippets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="na">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果你想在其父级消息类型之外重复使用这个消息类型，你就把它称为 <code class="docutils literal notranslate"><span class="pre">_Parent_._Type_</span></code>：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SomeOtherMessage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">SearchResponse.Result</span><span class="w"> </span><span class="na">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你可以根据自己的意愿对信息进行深度嵌套：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Outer</span><span class="w"> </span><span class="p">{</span><span class="w">                  </span><span class="c1">// Level 0</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">MiddleAA</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Level 1</span>
+<span class="w">    </span><span class="kd">message</span><span class="w"> </span><span class="nc">Inner</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// Level 2</span>
+<span class="w">      </span><span class="kt">int64</span><span class="w"> </span><span class="na">ival</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w">  </span><span class="na">booly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">MiddleBB</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Level 1</span>
+<span class="w">    </span><span class="kd">message</span><span class="w"> </span><span class="nc">Inner</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// Level 2</span>
+<span class="w">      </span><span class="kt">int32</span><span class="w"> </span><span class="na">ival</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w">  </span><span class="na">booly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating">
+<span id="id14"></span><h2>更新消息类型<a class="headerlink" href="#updating" title="永久链接至标题">¶</a></h2>
+<p>如果一个现有的消息类型不再满足你的所有需求——例如，你希望消息格式有一个额外的字段——但你仍然想使用用旧格式创建的代码，不要担心！更新消息类型非常简单，不会破坏你现有的任何代码。只要记住以下规则：</p>
+<ul class="simple">
+<li><p>不要改变任何现有字段的字段编号。</p></li>
+<li><p>如果你添加了新的字段，任何由使用你的 “旧” 消息格式的代码序列化的消息仍然可以被你新生成的代码解析。你应该记住这些元素的 <strong>默认值</strong>，以便新的代码可以正确地与旧代码生成的消息互动。同样，由你的新代码创建的消息可以被你的旧代码解析：旧的二进制文件在解析时只需忽略新字段。详见 <strong>未知字段</strong> 部分。</p></li>
+<li><p>字段可以被删除，只要字段号不在你更新的消息类型中再次使用。你可能想重命名这个字段，也许加上前缀 “OBSOLETE_”，或者把字段号保留下来，这样你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的未来用户就不会意外地重复使用这个号码。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int32</span></code>、<code class="docutils literal notranslate"><span class="pre">uint32</span></code>、<code class="docutils literal notranslate"><span class="pre">int64</span></code>、<code class="docutils literal notranslate"><span class="pre">uint64</span></code> 和 <code class="docutils literal notranslate"><span class="pre">bool</span></code> 都是兼容的——这意味着你可以将一个字段从这些类型中的一个改为另一个，而不会破坏向前或向后的兼容。如果从 wire 上解析出的数字不符合相应的类型，你会得到与你在 C++ 中把数字投到该类型的相同效果（例如，如果一个 64 位的数字被读成 <code class="docutils literal notranslate"><span class="pre">int32</span></code>，它将被截断为 32 位）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sint32</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sint64</span></code> 是相互兼容的，但与其他整数类型不兼容。</p></li>
+<li><p>只要字节是有效的UTF-8，<code class="docutils literal notranslate"><span class="pre">bytes</span></code> 和 <code class="docutils literal notranslate"><span class="pre">string</span></code> 是兼容的。</p></li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">bytes</span></code> 包含信息的编码版本，则嵌入式信息与字节兼容。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed32</span></code> 与 <code class="docutils literal notranslate"><span class="pre">sfixed32</span></code> 兼容，而 <code class="docutils literal notranslate"><span class="pre">fixed64</span></code> 与 <code class="docutils literal notranslate"><span class="pre">sfixed64</span></code> 兼容。</p></li>
+<li><p>对于 <code class="docutils literal notranslate"><span class="pre">string</span></code>、<code class="docutils literal notranslate"><span class="pre">bytes</span></code> 和消息字段，<code class="docutils literal notranslate"><span class="pre">optional</span></code> 与 <code class="docutils literal notranslate"><span class="pre">repeated</span></code> 兼容。给出重复字段的序列化数据作为输入，如果是原始类型的字段，期望这个字段是 <code class="docutils literal notranslate"><span class="pre">optional</span></code> 客户端将采取最后的输入值，如果是消息类型的字段，将合并所有输入元素。请注意，这对于数字类型，包括 bool 和 <code class="docutils literal notranslate"><span class="pre">enum</span></code>，通常是不安全的。数字类型的重复字段可以用 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding#packed"><code class="docutils literal notranslate"><span class="pre">packed</span></code></a> 的格式进行序列化，当期望有一个 <code class="docutils literal notranslate"><span class="pre">optional</span></code> 字段时，这将不能被正确解析。</p></li>
+<li><p>改变默认值一般是可以的，只要你记住默认值是不会在 wire 发送的。因此，如果一个程序收到一个没有设置特定字段的消息，该程序将看到默认值，因为它是在该程序的协议版本中定义的。它不会看到发件人代码中定义的默认值。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code> 与 <code class="docutils literal notranslate"><span class="pre">int32</span></code>、<code class="docutils literal notranslate"><span class="pre">uint32</span></code>、<code class="docutils literal notranslate"><span class="pre">int64</span></code> 和 <code class="docutils literal notranslate"><span class="pre">uint64</span></code> 在 wire 格式上是兼容的（注意，如果数值不合适，会被截断），但是要注意，当消息被反序列化时，客户端代码可能会对它们进行不同的处理。值得注意的是，当消息被反序列化时，未被识别的 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 值会被丢弃，这使得字段的 <code class="docutils literal notranslate"><span class="pre">has..</span></code> 访问器返回 <code class="docutils literal notranslate"><span class="pre">false</span></code>，其 <code class="docutils literal notranslate"><span class="pre">getter</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 定义中列出的第一个值，或者默认值（如果指定了一个）。在重复 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 字段的情况下，任何未被识别的值都会从列表中剥离出来。然而，一个整数字段将始终保留其值。正因为如此，当把一个整数升级为 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 时，你需要非常小心，以免在电线上收到超界的 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 值。</p></li>
+<li><p>将一个单一的可选值改成一个 <strong>new</strong>  <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的成员是安全的，而且二进制兼容。将多个可选字段移入一个新的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中可能是安全的，如果你确信没有代码同时设置多个字段的话。将任何字段移入一个现有的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中是不安全的。</p></li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2>未知字段<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<p>未知（Unknown）字段是格式良好的协议缓冲区序列化数据，代表解析器不认识的字段。例如，当一个旧的二进制文件解析一个新的二进制文件发送的带有新字段的数据时，这些新字段就成为旧二进制文件中的未知字段。</p>
+<p>最初，proto3 消息在解析过程中总是丢弃未知字段，但在 3.5 版本中，我们重新引入了对未知字段的保留，以匹配 proto2 行为。在 3.5 及以后的版本中，未知字段在解析过程中被保留，并包含在序列化的输出中。</p>
+</div>
+<div class="section" id="any">
+<h2>Any<a class="headerlink" href="#any" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Any</span></code> 消息类型让你把消息作为嵌入式类型使用，而不需要他们的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 定义。一个 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 包含一个任意的序列化消息的字节，以及一个作为全局唯一标识符的 URL，并解析为该消息的类型。要使用 Any 类型，你需要导入 <code class="docutils literal notranslate"><span class="pre">google/protobuf/any.proto</span></code>。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="s">&quot;google/protobuf/any.proto&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ErrorStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="kd">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">google.protobuf.Any</span><span class="w"> </span><span class="na">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>给定消息类型的默认类型 URL 是 <code class="docutils literal notranslate"><span class="pre">type.googleapis.com/_packagename_._messagename_</span></code>。</p>
+<p>不同的语言实现将支持运行时库帮助器，以类型安全的方式打包和解压 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 值——例如，在 Java 中，<code class="docutils literal notranslate"><span class="pre">Any</span></code> 类型将有特殊的 <code class="docutils literal notranslate"><span class="pre">pack()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">unpack()</span></code> 访问器，而在 C++ 中有 <code class="docutils literal notranslate"><span class="pre">PackFrom()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">UnpackTo()</span></code> 方法。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Storing an arbitrary message type in Any.</span>
+<span class="n">NetworkErrorDetails</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="n">ErrorStatus</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="n">status</span><span class="p">.</span><span class="n">add_details</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">PackFrom</span><span class="p">(</span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Reading an arbitrary message from Any.</span>
+<span class="n">ErrorStatus</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Any</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">detail</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">status</span><span class="p">.</span><span class="n">details</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">detail</span><span class="p">.</span><span class="n">Is</span><span class="o">&lt;</span><span class="n">NetworkErrorDetails</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">NetworkErrorDetails</span><span class="w"> </span><span class="n">network_error</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">detail</span><span class="p">.</span><span class="n">UnpackTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">network_error</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">network_error</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>目前，用于处理 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 类型的运行时库正在开发中。</p>
+<p>如果你已经熟悉了 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 的语法，<code class="docutils literal notranslate"><span class="pre">Any</span></code> 可以容纳任意的 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 消息，类似于 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 消息，可以允许 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/proto#extensions">扩展</a>。</p>
+</div>
+<div class="section" id="oneof">
+<h2>Oneof<a class="headerlink" href="#oneof" title="永久链接至标题">¶</a></h2>
+<p>如果你有一条有许多可选字段的消息，并且最多只有一个字段会同时被设置，你可以通过使用 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 功能来强制执行这一行为并节省内存。</p>
+<p><code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段和可选字段一样，只是 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的所有字段都共享内存，而且最多只能同时设置一个字段。设置 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的任何成员都会自动清除所有其他成员。你可以使用一个特殊的 <code class="docutils literal notranslate"><span class="pre">case()</span></code> 或 <code class="docutils literal notranslate"><span class="pre">WhichOneof()</span></code> 方法来检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的哪个值被设置了（如果有的话），这取决于你选择的语言。</p>
+<div class="section" id="id16">
+<h3>使用 Oneof<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<p>要在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中定义一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code>，你要使用 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 关键字，后面跟着你的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 名称，在这里是 <code class="docutils literal notranslate"><span class="pre">test_oneof</span></code>：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SampleMessage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">oneof</span><span class="w"> </span><span class="n">test_oneof</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SubMessage</span><span class="w"> </span><span class="na">sub_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后你将你的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段添加到 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 定义中。你可以添加任何类型的字段，除了 <code class="docutils literal notranslate"><span class="pre">map</span></code> 字段和 <code class="docutils literal notranslate"><span class="pre">repeated</span></code> 字段。</p>
+<p>在你生成的代码中，<code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段与普通的可选方法有相同的 <code class="docutils literal notranslate"><span class="pre">getters</span></code> 和 <code class="docutils literal notranslate"><span class="pre">setters</span></code>。你还会得到一个特殊的方法来检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的哪个值（如果有的话）被设置。你可以在相关的 API 参考资料中找到更多关于你所选语言的 oneof <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">API 的信息</a>。</p>
+</div>
+<div class="section" id="id17">
+<h3>Oneof 特征<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<p>设置一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段将自动清除 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的所有其他成员。因此，如果你设置了几个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段，只有你设置的最后一个字段仍然有一个值。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SampleMessage message;
+message.set_name(&quot;name&quot;);
+CHECK(message.has_name());
+message.mutable_sub_message();   // Will clear name field.
+CHECK(!message.has_name());
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>如果解析器在 wire 上遇到多个相同的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 成员，那么在解析的消息中只使用最后看到的成员。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneof</span></code> 不支持扩展。</p></li>
+<li><p>一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 不能被重复。</p></li>
+<li><p>反射 API 对 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段有效。</p></li>
+<li><p>如果你将一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段设置为默认值（例如将一个 <code class="docutils literal notranslate"><span class="pre">int32</span></code> 的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段设置为 <code class="docutils literal notranslate"><span class="pre">0</span></code>），该 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段的 “case” 将被设置，并且该值将在 wire 上被序列化。</p></li>
+<li><p>如果你使用 C++，确保你的代码不会导致内存崩溃。下面的示例代码会崩溃，因为 <code class="docutils literal notranslate"><span class="pre">sub_message</span></code> 已经通过调用 <code class="docutils literal notranslate"><span class="pre">set_name()</span></code> 方法被删除了。</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SampleMessage</span> <span class="n">message</span><span class="p">;</span>
+<span class="n">SubMessage</span><span class="o">*</span> <span class="n">sub_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">mutable_sub_message</span><span class="p">();</span>
+<span class="n">message</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>      <span class="o">//</span> <span class="n">Will</span> <span class="n">delete</span> <span class="n">sub_message</span>
+<span class="n">sub_message</span><span class="o">-&gt;</span><span class="n">set_</span><span class="o">...</span>            <span class="o">//</span> <span class="n">Crashes</span> <span class="n">here</span>
+</pre></div>
+</div>
+<p>同样在 C++ 中，如果你用 <code class="docutils literal notranslate"><span class="pre">oneofs</span></code> <code class="docutils literal notranslate"><span class="pre">Swap()</span></code> 两个消息，每个消息最后都会有对方的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 情况：在下面的例子中，<code class="docutils literal notranslate"><span class="pre">msg1</span></code> 会有一个 <code class="docutils literal notranslate"><span class="pre">sub_message</span></code>，<code class="docutils literal notranslate"><span class="pre">msg2</span></code> 会有一个名字。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SampleMessage</span> <span class="n">msg1</span><span class="p">;</span>
+<span class="n">msg1</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>
+<span class="n">SampleMessage</span> <span class="n">msg2</span><span class="p">;</span>
+<span class="n">msg2</span><span class="o">.</span><span class="n">mutable_sub_message</span><span class="p">();</span>
+<span class="n">msg1</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg2</span><span class="p">);</span>
+<span class="n">CHECK</span><span class="p">(</span><span class="n">msg1</span><span class="o">.</span><span class="n">has_sub_message</span><span class="p">());</span>
+<span class="n">CHECK</span><span class="p">(</span><span class="n">msg2</span><span class="o">.</span><span class="n">has_name</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>向后兼容的问题<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<p>在添加或删除 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段时要小心。如果检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的值返回 <code class="docutils literal notranslate"><span class="pre">None/NOT_SET</span></code>，这可能意味着 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 没有被设置，或者它被设置为不同版本的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的一个字段。没有办法区分，因为没有办法知道线上的未知字段是否是 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的成员。</p>
+<p><strong>标签重复使用问题</strong></p>
+<ul class="simple">
+<li><p><strong>将可选字段移入或移出一个 oneof</strong>：在消息被序列化和解析后，你可能会失去一些信息（一些字段会被清除）。然而，你可以安全地将一个字段移入一个新的 oneof 中，如果知道只有一个字段被设置的话，你也许可以移动多个字段。</p></li>
+<li><p><strong>删除一个 oneof 字段，然后把它加回来</strong>：这可能会在消息被序列化和解析后清除你当前设置的 oneof 字段。</p></li>
+<li><p><strong>拆分或合并 oneof</strong>：这与移动普通的可选字段有类似的问题。</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="maps">
+<span id="id19"></span><h2>Maps<a class="headerlink" href="#maps" title="永久链接至标题">¶</a></h2>
+<p>如果你想创建一个关联映射作为数据定义的一部分，协议缓冲区提供了一个方便的快捷语法。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">&lt;</span><span class="n">key_type</span><span class="p">,</span><span class="w"> </span><span class="n">value_type</span><span class="p">&gt;</span><span class="w"> </span><span class="na">map_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>…其中 <code class="docutils literal notranslate"><span class="pre">key_type</span></code> 可以是任何积分或字符串类型（所以，除了浮点类型和字节之外的任何标量类型）。请注意，<code class="docutils literal notranslate"><span class="pre">enum</span></code> 不是有效的 <code class="docutils literal notranslate"><span class="pre">key_type</span></code>。<code class="docutils literal notranslate"><span class="pre">value_type</span></code> 可以是任何类型，除了另一个 <code class="docutils literal notranslate"><span class="pre">map</span></code>。</p>
+<p>因此，例如，如果你想创建一个项目 <code class="docutils literal notranslate"><span class="pre">map</span></code>，其中每个 <code class="docutils literal notranslate"><span class="pre">Project</span></code> 信息与一个字符串键相关联，你可以这样定义它。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Project</span><span class="p">&gt;</span><span class="w"> </span><span class="na">projects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Map fields cannot be <code class="docutils literal notranslate"><span class="pre">repeated</span></code>.</p></li>
+<li><p>Wire format ordering and map iteration ordering of map values is undefined, so you cannot rely on your map items being in a particular order.</p></li>
+<li><p>When generating text format for a <code class="docutils literal notranslate"><span class="pre">.proto</span></code>, maps are sorted by key. Numeric keys are sorted numerically.</p></li>
+<li><p>When parsing from the wire or when merging, if there are duplicate map keys the last key seen is used. When parsing a map from text format, parsing may fail if there are duplicate keys.</p></li>
+<li><p>If you provide a key but no value for a map field, the behavior when the field is serialized is language-dependent. In C++, Java, Kotlin, and Python the default value for the type is serialized, while in other languages nothing is serialized.</p></li>
+</ul>
+<p>生成的 map API 目前可用于所有 proto3 支持的语言。你可以在相关的 API 参考中找到更多关于你所选语言的 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">map API</a>。</p>
+<div class="section" id="map">
+<h3>map 特征<a class="headerlink" href="#map" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>不支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的扩展。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> 不能重复、可选、或必须。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> 值的 wire 格式排序和 <code class="docutils literal notranslate"><span class="pre">map</span></code> 迭代排序是未定义的，所以你不能依赖你的 <code class="docutils literal notranslate"><span class="pre">map</span></code> 项目在一个特定的顺序。</p></li>
+<li><p>在为 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 生成文本格式时， <code class="docutils literal notranslate"><span class="pre">map</span></code> 是按键排序的。数值键是按数字排序的。</p></li>
+<li><p>当从 wire 上解析或合并时，如果有重复的 <code class="docutils literal notranslate"><span class="pre">map</span></code> 键，则使用最后看到的键。当从文本格式解析一个 <code class="docutils literal notranslate"><span class="pre">map</span></code> 时，如果有重复的键，解析可能会失败。</p></li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3>向后兼容<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">map</span></code> 语法等同于电线上的以下内容，所以不支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的协议缓冲区实现仍然可以处理你的数据。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">MapFieldEntry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">key_type</span><span class="w"> </span><span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">value_type</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">repeated</span><span class="w"> </span><span class="n">MapFieldEntry</span><span class="w"> </span><span class="na">map_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>任何支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的协议缓冲区实现都必须同时产生和接受可以被上述定义接受的数据。</p>
+</div>
+</div>
+<div class="section" id="id21">
+<h2>包<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h2>
+<p>你可以在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中添加一个可选的包指定器，以防止协议消息类型之间的名称冲突。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">foo</span><span class="o">.</span><span class="n">bar</span><span class="p">;</span>
+<span class="kd">message</span><span class="w"> </span><span class="nc">Open</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>然后你可以在定义你的消息类型的字段时使用包指定器：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">...</span>
+<span class="w">  </span><span class="n">foo.bar.Open</span><span class="w"> </span><span class="na">open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>包指定符影响生成代码的方式取决于你选择的语言。</p>
+<ul class="simple">
+<li><p>在 C++ 中，生成的类被包裹在一个 C++ 命名空间中。例如，<code class="docutils literal notranslate"><span class="pre">Open</span></code> 将被放在命名空间 <code class="docutils literal notranslate"><span class="pre">foo::bar</span></code> 中。</p></li>
+<li><p>在 Java 中，除非你在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中明确地提供一个选项 <code class="docutils literal notranslate"><span class="pre">java_package</span></code>，否则包将作为 Java 包使用。</p></li>
+<li><p>在 Python 中，包指令被忽略，因为 Python 模块是根据它们在文件系统中的位置来组织的。</p></li>
+<li><p>在 Go 中，包指令被忽略，生成的 <code class="docutils literal notranslate"><span class="pre">.pb.go</span></code> 文件在以相应的 <code class="docutils literal notranslate"><span class="pre">go_proto_library</span></code> 规则命名的包中。</p></li>
+</ul>
+<p>即使包指令不直接影响生成的代码，例如在 Python 中，仍然强烈建议为 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件指定包，否则可能导致描述符中的命名冲突，并使 proto 在其他语言中无法移植。</p>
+<div class="section" id="id22">
+<h3>包和名称解析<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<p>在协议缓冲区语言中，类型名称解析的工作方式与 C++ 类似：首先搜索最内层的范围，然后是下一个最内层的范围，以此类推，每个包都被认为是其父包的 “内部”。前面的’.’（例如，<code class="docutils literal notranslate"><span class="pre">.foo.bar.Baz</span></code>）意味着要从最外层的范围开始。</p>
+<p>协议缓冲区编译器通过解析导入的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件来解决所有的类型名称。每种语言的代码生成器知道如何引用该语言中的每个类型，即使它有不同的范围规则。</p>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>定义服务<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h2>
+<p>如果你想在 RPC（远程过程调用）系统中使用你的消息类型，你可以在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义一个 RPC 服务接口，协议缓冲区编译器将用你选择的语言生成服务接口代码和存根。因此，举例来说，如果你想定义一个 RPC 服务的方法，该方法接收你的 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 并返回 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code>，你可以在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义它，如下：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">service</span><span class="w"> </span><span class="n">SearchService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">rpc</span><span class="w"> </span><span class="n">Search</span><span class="p">(</span><span class="n">SearchRequest</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">SearchResponse</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>默认情况下，协议编译器将生成一个名为 <code class="docutils literal notranslate"><span class="pre">SearchService</span></code> 的抽象接口和一个相应的 “stub” 实现。存根将所有调用转发到 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code>，而 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code> 又是一个抽象接口，你必须根据自己的 RPC 系统来定义。例如，你可以实现一个 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code>，它将消息序列化并通过 HTTP 将其发送到服务器。换句话说，生成的存根为进行基于协议缓冲区的 RPC 调用提供了一个类型安全的接口，而不会将你锁定在任何特定的 RPC 实现中。因此，在 C++ 中，你可能最终会得到这样的代码：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">protobuf</span><span class="o">::</span><span class="n">RpcChannel</span><span class="o">*</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span><span class="w"></span>
+<span class="n">protobuf</span><span class="o">::</span><span class="n">RpcController</span><span class="o">*</span><span class="w"> </span><span class="n">controller</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchService</span><span class="o">*</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchRequest</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchResponse</span><span class="w"> </span><span class="n">response</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">DoSearch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// You provide classes MyRpcChannel and MyRpcController, which implement</span>
+<span class="w">  </span><span class="c1">// the abstract interfaces protobuf::RpcChannel and protobuf::RpcController.</span>
+<span class="w">  </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRpcChannel</span><span class="p">(</span><span class="s">&quot;somehost.example.com:1234&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRpcController</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// The protocol compiler generates the SearchService class based on the</span>
+<span class="w">  </span><span class="c1">// definition given above.</span>
+<span class="w">  </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SearchService</span><span class="o">::</span><span class="n">Stub</span><span class="p">(</span><span class="n">channel</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Set up the request.</span>
+<span class="w">  </span><span class="n">request</span><span class="p">.</span><span class="n">set_query</span><span class="p">(</span><span class="s">&quot;protocol buffers&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Execute the RPC.</span>
+<span class="w">  </span><span class="n">service</span><span class="o">-&gt;</span><span class="n">Search</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">protobuf</span><span class="o">::</span><span class="n">NewCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Done</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Done</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">controller</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>所有的服务类也都实现了服务接口，它提供了一种调用特定方法的方法，而不需要在编译时知道方法的名称或其输入和输出类型。在服务器端，这可以用来实现一个 RPC 服务器，你可以用它来注册服务。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleSearchService</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">SearchService</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w"> </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Search</span><span class="p">(</span><span class="n">protobuf</span><span class="o">::</span><span class="n">RpcController</span><span class="o">*</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="n">SearchRequest</span><span class="o">*</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">SearchResponse</span><span class="o">*</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">protobuf</span><span class="o">::</span><span class="n">Closure</span><span class="o">*</span><span class="w"> </span><span class="n">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">query</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;google&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">response</span><span class="o">-&gt;</span><span class="n">add_result</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_url</span><span class="p">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">query</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;protocol buffers&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">response</span><span class="o">-&gt;</span><span class="n">add_result</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_url</span><span class="p">(</span><span class="s">&quot;http://protobuf.googlecode.com&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">done</span><span class="o">-&gt;</span><span class="n">Run</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// You provide class MyRpcServer.  It does not have to implement any</span>
+<span class="w">  </span><span class="c1">// particular interface; this is just an example.</span>
+<span class="w">  </span><span class="n">MyRpcServer</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">protobuf</span><span class="o">::</span><span class="n">Service</span><span class="o">*</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExampleSearchService</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">server</span><span class="p">.</span><span class="n">ExportOnPort</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">server</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>如果你不想插入你自己现有的 RPC 系统，你现在可以使用 <a class="reference external" href="https://github.com/grpc/grpc-common">gRPC</a>：一个在 Google 开发的语言和平台中立的开源 RPC 系统。gRPC 在协议缓冲区方面工作得特别好，让你使用一个特殊的协议缓冲区编译器插件直接从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件生成相关的 RPC 代码。然而，由于用 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 和 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 生成的客户端和服务器之间存在潜在的兼容性问题，我们建议你使用 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 来定义 gRPC 服务。</p>
+<p>除了 gRPC 之外，还有一些正在进行的第三方项目，为协议缓冲区开发 RPC 实现。关于我们所知道的项目的链接列表，请参见<a class="reference external" href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">第三方附加组件 wiki 页面</a>。</p>
+</div>
+<div class="section" id="id24">
+<h2>选项<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中的单个声明可以用一些选项进行注释。选项并不改变声明的整体含义，但可能会影响它在特定情况下的处理方式。可用选项的完整列表在 <code class="docutils literal notranslate"><span class="pre">google/protobuf/descriptor.proto</span></code> 中定义。</p>
+<p>有些选项是文件级的选项，意味着它们应该写在顶层范围内，而不是在任何消息、枚举或服务定义内。有些选项是消息级的，意味着它们应该写在消息定义中。有些选项是字段级的，意思是它们应该写在字段定义里面。选项也可以写在枚举类型、枚举值、oneof 字段、服务类型和服务方法上；然而，目前没有任何有用的选项存在于这些方面。</p>
+<p>下面是几个最常用的选项：</p>
+</div>
+<div class="section" id="id25">
+<h2>生成你的类<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<p>为了生成你需要的 Java、Python 或 C++ 代码来处理 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义的消息类型，你需要在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器 <code class="docutils literal notranslate"><span class="pre">protoc</span></code>。</p>
+<p>协议编译器的调用方法如下：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>protoc --proto_path<span class="o">=</span>IMPORT_PATH --cpp_out<span class="o">=</span>DST_DIR --java_out<span class="o">=</span>DST_DIR --python_out<span class="o">=</span>DST_DIR --go_out<span class="o">=</span>DST_DIR --ruby_out<span class="o">=</span>DST_DIR --objc_out<span class="o">=</span>DST_DIR --csharp_out<span class="o">=</span>DST_DIR path/to/file.proto
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMPORT_PATH</span></code> 指定了一个在解析导入指令时寻找 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的目录。如果省略，将使用当前目录。可以通过多次传递 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 选项来指定多个导入目录；它们将被按顺序搜索。<code class="docutils literal notranslate"><span class="pre">-IIMPORT_PATH</span></code> 可以作为 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 的缩写形式。</p></li>
+<li><p>你可以提供一个或多个输出指令：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--cpp_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">C++</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/cpp-generated">C++ 生成的代码参考</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--java_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">Java</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/java-generated">Java 生成的代码参考</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--python_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">Python</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/python-generated">Python 生成的代码参考</a>。</p></li>
+</ul>
+<p>作为一种额外的便利，如果 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 以 <code class="docutils literal notranslate"><span class="pre">.zip</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.jar</span></code> 结尾，编译器将把输出写入一个给定名称的 <code class="docutils literal notranslate"><span class="pre">ZIP</span></code> 格式的归档文件。如果输出档案已经存在，它将被覆盖。编译器不够聪明，无法将文件添加到现有的存档中。</p>
+</li>
+<li><p>你必须提供一个或多个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件作为输入。可以同时指定多个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件。尽管这些文件是相对于当前目录命名的，但每个文件都必须位于 <code class="docutils literal notranslate"><span class="pre">IMPORT_PATH</span></code> 之中，以便编译器能够确定其标准名称。</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "xinetzone/protobuf-book",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./start"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                 <div class="tex2jax_ignore mathjax_ignore section" id="proto3">
+<h1>proto3<a class="headerlink" href="#proto3" title="永久链接至标题">¶</a></h1>
+<p>参阅 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/proto3">Proto3 语言指南</a></p>
+<p>本指南描述了如何使用协议缓冲区语言来构造你的协议缓冲区数据，包括 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的语法和如何从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件生成数据访问类。它涵盖了协议缓冲区语言的 proto3 版本。</p>
+<div class="section" id="id1">
+<h2>定义消息类型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>首先让我们看一个非常简单的例子。假设你想定义一个搜索请求的消息格式，每个搜索请求都有一个查询字符串，你感兴趣的特定结果页面，以及每页的结果数量。这里是你用来定义消息类型的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>文件的第一行指定你使用的是 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 语法：如果你不这样做，协议缓冲区编译器会认为你使用的是 <code class="docutils literal notranslate"><span class="pre">proto2</span></code>。这必须是文件中第一个非空的、非注释的行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 消息定义指定了三个字段（名称/值对），每一个字段代表你想在这种类型的消息中包含的数据。每个字段都有一个名称和一个类型。</p></li>
+</ul>
+<div class="section" id="id2">
+<h3>指定字段类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>在上面的例子中，所有的字段都是 <a class="reference external" href="#scalar">标量类型</a>：两个整数（<code class="docutils literal notranslate"><span class="pre">page_number</span></code> 和 <code class="docutils literal notranslate"><span class="pre">result_per_page</span></code>）和一个字符串（<code class="docutils literal notranslate"><span class="pre">query</span></code>）。然而，你也可以为你的字段指定复合类型，包括枚举和其他消息类型。</p>
+</div>
+<div class="section" id="id3">
+<h3>分配字段编号<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>正如你所看到的，消息定义中的每个字段都有一个 <strong>唯一的编号</strong>。这些数字用于识别你的 <a class="reference internal" href="encoding.html"><span class="doc std std-doc">消息二进制格式</span></a> 中的字段，一旦你的消息类型被使用，就不应该改变。范围在 1 到 15 的字段编号需要一个字节来编码，包括字段编号和字段的类型（你可以在 <a class="reference external" href="encoding#structure">协议缓冲区编码</a> 中找到更多的信息）。16 到 2047 范围内的字段号需要两个字节。所以你应该把字段号 1 到 15 保留给非常频繁出现的消息元素。记住要为将来可能增加的频繁出现的元素留出一些空间。</p>
+<p>你可以指定最小的字段号是 <span class="math notranslate nohighlight">\(1\)</span>，最大的是 <span class="math notranslate nohighlight">\(2^{29}-1\)</span>，即 <span class="math notranslate nohighlight">\(536\,870\,911\)</span>。你也不能使用 19000 到 19999（<code class="docutils literal notranslate"><span class="pre">FieldDescriptor::kFirstReservedNumber</span></code> 到<code class="docutils literal notranslate"><span class="pre">FieldDescriptor::kLastReservedNumber</span></code>）这些数字，因为它们是为协议缓冲区实现保留的——如果你在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中使用这些保留数字之一，协议缓冲区编译器会抱怨。同样地，你也不能使用任何先前 <code class="docutils literal notranslate"><span class="pre">reserved</span></code> 字段编号。</p>
+</div>
+<div class="section" id="id4">
+<h3>指定字段规则<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>你指定消息字段是以下之一：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">singular</span></code>：一个格式良好的消息可以有零或一个这个字段（但不能超过一个）。而这是 proto3 语法的默认字段规则。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repeated</span></code>：这个字段可以在一条格式良好的信息中重复任何次数（包括零）。重复值的顺序将被保留。</p></li>
+</ul>
+<p>在 proto3 中，标量数字类型的重复字段默认使用 <code class="docutils literal notranslate"><span class="pre">packed</span></code> 编码。</p>
+<p>你可以在 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding#packed">协议缓冲区编码</a> 中找到更多关于 <code class="docutils literal notranslate"><span class="pre">packed</span></code> 编码的信息。</p>
+</div>
+<div class="section" id="id5">
+<h3>添加更多信息类型<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>多个消息类型可以在一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义。如果你要定义多个相关的消息，这很有用——因此，例如，如果你想定义与你的 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息类型相对应的回复消息格式，你可以把它添加到同一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">组合消息导致臃肿</p>
+<p>虽然在一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中可以定义多种消息类型（如消息、枚举和服务），但如果在一个文件中定义大量具有不同依赖性的消息，也会导致依赖性臃肿。建议在每个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中包含尽可能少的消息类型。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>添加注释<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>要给你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件添加注释，请使用 C/C++ 风格的 <code class="docutils literal notranslate"><span class="pre">//</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">...</span> <span class="pre">*/</span></code> 语法。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="cm">/* SearchRequest represents a search query, with pagination options to</span>
+<span class="cm"> * indicate which results to include in the response. */</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// Which page number do we want?</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">  </span><span class="c1">// Number of results to return per page.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>保留字段<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>如果你通过完全删除一个字段来更新一个消息类型，或者把它注释掉，那么未来的用户在对该类型进行自己的更新时可以重复使用这个字段的编号。如果他们后来加载同一 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的旧版本，这可能会导致严重的问题，包括数据损坏、隐私错误等等。确保这种情况不会发生的一个方法是指定你删除的字段的字段号（和/或名称，这也会给 JSON 序列化带来问题）被保留。如果将来有任何用户试图使用这些字段标识符，协议缓冲区编译器会抱怨。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">reserved</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
+<span class="w">  </span><span class="k">reserved</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>注意，你不能在同一 <code class="docutils literal notranslate"><span class="pre">reserved</span></code> 语句中混合使用字段名和字段号。</p>
+</div>
+<div class="section" id="proto">
+<h3>从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成了什么？<a class="headerlink" href="#proto" title="永久链接至标题">¶</a></h3>
+<p>当你在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器时，编译器会用你选择的语言生成你需要的代码，以处理你在文件中描述的消息类型，包括获取和设置字段值，将你的消息序列化到输出流中，并从输入流中解析你的消息。</p>
+<ul class="simple">
+<li><p>对于 C++，编译器从每个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成一个 <code class="docutils literal notranslate"><span class="pre">.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.cc</span></code> 文件，为文件中描述的每个消息类型生成一个类。</p></li>
+<li><p>对于 Java，编译器为每个消息类型生成一个 <code class="docutils literal notranslate"><span class="pre">.java</span></code> 文件，以及用于创建消息类实例的特殊 Builder 类。</p></li>
+<li><p>Python 有点不同-——Python 编译器在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中生成一个带有每个消息类型的静态描述符的模块，然后与元类一起使用，在运行时创建必要的 Python 数据访问类。</p></li>
+<li><p>对于 Go 来说，编译器会生成一个 <code class="docutils literal notranslate"><span class="pre">.pb.go</span></code> 文件，为你文件中的每个消息类型提供一个类型。</p></li>
+</ul>
+<p>你可以按照你所选择的语言的教程来了解更多关于使用每种语言的 API 的信息。关于更多的 API 细节，请看相关的 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">API 参考资料</a>。</p>
+</div>
+</div>
+<div class="section" id="scalar">
+<span id="id8"></span><h2>标量值类型<a class="headerlink" href="#scalar" title="永久链接至标题">¶</a></h2>
+<p>一个标量消息字段可以有以下类型之一：该表显示了在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中指定的类型，以及自动生成的类中的相应类型。</p>
+<p><img alt="" src="../_images/type.png" /></p>
+</div>
+<div class="section" id="id9">
+<h2>可选字段和默认值<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>如上所述，消息描述中的元素可以被标记为 <code class="docutils literal notranslate"><span class="pre">optional</span></code>。一个格式良好的消息可能包含也可能不包含可选元素。当一条消息被解析时，如果它不包含一个可选元素，解析对象中的相应字段就会被设置为该字段的默认值。默认值可以作为消息描述的一部分来指定。例如，假设你想为 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 的 <code class="docutils literal notranslate"><span class="pre">result_per_page</span></code> 值提供一个 10 的默认值。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">optional</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>如果没有为一个可选元素指定默认值，则会使用一个特定类型的默认值：对于字符串，默认值是空字符串。对于字节，默认值是空的字节字符串。对于 Bools，默认值是false。对于数字类型，默认值是 0。对于枚举，默认值是枚举的类型定义中列出的第一个值。这意味着在向枚举值列表的开头添加一个值时必须小心。关于如何安全地改变定义的指南，请参见 <a class="reference external" href="#updating">更新消息类型</a> 部分。</p>
+</div>
+<div class="section" id="enum">
+<span id="id10"></span><h2>枚举<a class="headerlink" href="#enum" title="永久链接至标题">¶</a></h2>
+<p>当你定义一个消息类型时，你可能希望它的一个字段只具有预定义的值列表中的一个。例如，假设你想为每个 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 添加一个 <code class="docutils literal notranslate"><span class="pre">corpus</span></code> 字段，语料库可以是<code class="docutils literal notranslate"><span class="pre">UNIVERSAL</span></code>、<code class="docutils literal notranslate"><span class="pre">WEB</span></code>、<code class="docutils literal notranslate"><span class="pre">IMAGES</span></code>、<code class="docutils literal notranslate"><span class="pre">LOCAL</span></code>、<code class="docutils literal notranslate"><span class="pre">NEWS</span></code>、<code class="docutils literal notranslate"><span class="pre">PRODUCTS</span></code> 或 <code class="docutils literal notranslate"><span class="pre">VIDEO</span></code>。你可以通过在你的消息定义中添加一个 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 来实现这个目的：一个具有 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 类型的字段只能有一组指定的常数作为它的值（如果你试图提供一个不同的值，解析器会把它当作一个未知的字段）。在下面的例子中，我们添加了一个名为 <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 的 <code class="docutils literal notranslate"><span class="pre">enum</span></code>，其中包含所有可能的值，还有一个 <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 类型的字段。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int32</span><span class="w"> </span><span class="na">result_per_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">Corpus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">UNIVERSAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">WEB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="na">IMAGES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="na">LOCAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="na">NEWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="na">PRODUCTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="na">VIDEO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">Corpus</span><span class="w"> </span><span class="na">corpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>正如你所看到的，<code class="docutils literal notranslate"><span class="pre">Corpus</span></code> 枚举的第一个常量映射为零：每个枚举定义必须包含一个映射为零的常量作为其第一个元素。这是因为：</p>
+<ul class="simple">
+<li><p>必须有一个零值，这样我们就可以用 0 作为数字的默认值。</p></li>
+<li><p>零值需要是第一个元素，以便与 proto2 语义兼容，在 proto2 中第一个枚举值总是默认值。</p></li>
+</ul>
+<p>你可以通过给不同的枚举常量分配相同的值来定义别名。要做到这一点，你需要将 <code class="docutils literal notranslate"><span class="pre">allow_alias</span></code> 选项设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code>，否则当发现别名时，协议编译器会产生错误信息。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">MyMessage1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">EnumAllowingAlias</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">option</span><span class="w"> </span><span class="na">allow_alias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="na">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">STARTED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="na">RUNNING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">message</span><span class="w"> </span><span class="nc">MyMessage2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">EnumNotAllowingAlias</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">UNKNOWN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">STARTED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>枚举器常量必须在 32 位整数的范围内。由于枚举值在 wire 上使用 <code class="docutils literal notranslate"><span class="pre">varint</span></code> 编码，负值的效率很低，因此不推荐使用。你可以在一个消息定义中定义枚举，就像上面的例子一样，也可以在外面定义——这些枚举可以在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中的任何消息定义中重复使用。你也可以使用语法 <code class="docutils literal notranslate"><span class="pre">_MessageType_._EnumType_</span></code>，将一条消息中声明的枚举类型作为另一条消息中的字段类型。</p>
+<p>当你在一个使用枚举的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器时，生成的代码对于 Java 或 C++ 将有一个相应的枚举，或者对于 Python 有一个特殊的 <code class="docutils literal notranslate"><span class="pre">EnumDescriptor</span></code> 类，用来在运行时生成的类中创建一组具有整数值的符号常量。</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>生成的代码可能会受到特定语言对枚举器数量的限制（一种语言低至数千）。请查看你计划使用的语言的限制。</p>
+</div>
+<p>关于如何在你的应用程序中使用消息枚举的更多信息，请参阅你 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">所选语言的生成代码</a> 指南。</p>
+</div>
+<div class="section" id="id11">
+<h2>使用其他消息类型<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>你可以使用其他消息类型作为字段类型。例如，假设你想在每个 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息中包含结果消息——要做到这一点，你可以在同一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中定义一个结果消息类型，然后在 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 中指定一个结果类型的字段。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="na">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">snippets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id12">
+<h3>导入定义<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>在上面的例子中，<code class="docutils literal notranslate"><span class="pre">Result</span></code> 消息类型与 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 定义在同一个文件中——如果你想用作字段类型的消息类型已经在另一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义了呢？</p>
+<p>你可以通过导入来使用其他 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的定义。要导入另一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的定义，你要在文件的顶部添加一个导入语句。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="s">&quot;myproject/other_protos.proto&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>默认情况下，你只能使用直接导入的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的定义。然而，有时你可能需要将一个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件移动到一个新的位置。与其直接移动 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件并在一次更改中更新所有的调用站点，你可以在旧的位置放一个占位符 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件，使用 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 概念将所有的导入转到新的位置。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>请注意，公共导入功能在 Java 中是不可用的。</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 依赖关系可以被任何导入包含 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">public</span></code> 语句的 <code class="docutils literal notranslate"><span class="pre">proto</span></code> 的代码所过渡依赖。比如说：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// new.proto</span>
+<span class="c1">// All definitions are moved here</span>
+</pre></div>
+</div>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// old.proto</span>
+<span class="c1">// This is the proto that all clients are importing.</span>
+<span class="k">import</span><span class="w"> </span><span class="n">public</span><span class="w"> </span><span class="s">&quot;new.proto&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s">&quot;other.proto&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="c1">// client.proto</span>
+<span class="k">import</span><span class="w"> </span><span class="s">&quot;old.proto&quot;</span><span class="p">;</span>
+<span class="c1">// You use definitions from old.proto and new.proto, but not other.proto</span>
+</pre></div>
+</div>
+<p>协议编译器在协议编译器命令行上使用 <code class="docutils literal notranslate"><span class="pre">-I/--proto_path</span></code> 标志指定的一组目录中搜索导入的文件。如果没有给出标志，它就在编译器被调用的目录中寻找。一般来说，你应该将 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 标志设置为项目的根目录，并对所有导入文件使用完全合格的名称。</p>
+</div>
+<div class="section" id="proto2">
+<h3>使用 proto2 消息类型<a class="headerlink" href="#proto2" title="永久链接至标题">¶</a></h3>
+<p>可以导入 proto2 消息类型并在你的 proto3 消息中使用它们，反之亦然。然而，proto2 的枚举不能用于 proto3 的语法。</p>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>嵌套类型<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<p>你可以在其他消息类型中定义和使用消息类型，就像下面的例子一样：这里，<code class="docutils literal notranslate"><span class="pre">Result</span></code> 消息被定义在 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code> 消息中。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">Result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">repeated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">snippets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="na">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果你想在其父级消息类型之外重复使用这个消息类型，你就把它称为 <code class="docutils literal notranslate"><span class="pre">_Parent_._Type_</span></code>：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SomeOtherMessage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">SearchResponse.Result</span><span class="w"> </span><span class="na">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你可以根据自己的意愿对信息进行深度嵌套：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Outer</span><span class="w"> </span><span class="p">{</span><span class="w">                  </span><span class="c1">// Level 0</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">MiddleAA</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Level 1</span>
+<span class="w">    </span><span class="kd">message</span><span class="w"> </span><span class="nc">Inner</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// Level 2</span>
+<span class="w">      </span><span class="kt">int64</span><span class="w"> </span><span class="na">ival</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w">  </span><span class="na">booly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kd">message</span><span class="w"> </span><span class="nc">MiddleBB</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Level 1</span>
+<span class="w">    </span><span class="kd">message</span><span class="w"> </span><span class="nc">Inner</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// Level 2</span>
+<span class="w">      </span><span class="kt">int32</span><span class="w"> </span><span class="na">ival</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w">  </span><span class="na">booly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating">
+<span id="id14"></span><h2>更新消息类型<a class="headerlink" href="#updating" title="永久链接至标题">¶</a></h2>
+<p>如果一个现有的消息类型不再满足你的所有需求——例如，你希望消息格式有一个额外的字段——但你仍然想使用用旧格式创建的代码，不要担心！更新消息类型非常简单，不会破坏你现有的任何代码。只要记住以下规则：</p>
+<ul class="simple">
+<li><p>不要改变任何现有字段的字段编号。</p></li>
+<li><p>如果你添加了新的字段，任何由使用你的 “旧” 消息格式的代码序列化的消息仍然可以被你新生成的代码解析。你应该记住这些元素的 <strong>默认值</strong>，以便新的代码可以正确地与旧代码生成的消息互动。同样，由你的新代码创建的消息可以被你的旧代码解析：旧的二进制文件在解析时只需忽略新字段。详见 <strong>未知字段</strong> 部分。</p></li>
+<li><p>字段可以被删除，只要字段号不在你更新的消息类型中再次使用。你可能想重命名这个字段，也许加上前缀 “OBSOLETE_”，或者把字段号保留下来，这样你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 的未来用户就不会意外地重复使用这个号码。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int32</span></code>、<code class="docutils literal notranslate"><span class="pre">uint32</span></code>、<code class="docutils literal notranslate"><span class="pre">int64</span></code>、<code class="docutils literal notranslate"><span class="pre">uint64</span></code> 和 <code class="docutils literal notranslate"><span class="pre">bool</span></code> 都是兼容的——这意味着你可以将一个字段从这些类型中的一个改为另一个，而不会破坏向前或向后的兼容。如果从 wire 上解析出的数字不符合相应的类型，你会得到与你在 C++ 中把数字投到该类型的相同效果（例如，如果一个 64 位的数字被读成 <code class="docutils literal notranslate"><span class="pre">int32</span></code>，它将被截断为 32 位）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sint32</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sint64</span></code> 是相互兼容的，但与其他整数类型不兼容。</p></li>
+<li><p>只要字节是有效的UTF-8，<code class="docutils literal notranslate"><span class="pre">bytes</span></code> 和 <code class="docutils literal notranslate"><span class="pre">string</span></code> 是兼容的。</p></li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">bytes</span></code> 包含信息的编码版本，则嵌入式信息与字节兼容。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed32</span></code> 与 <code class="docutils literal notranslate"><span class="pre">sfixed32</span></code> 兼容，而 <code class="docutils literal notranslate"><span class="pre">fixed64</span></code> 与 <code class="docutils literal notranslate"><span class="pre">sfixed64</span></code> 兼容。</p></li>
+<li><p>对于 <code class="docutils literal notranslate"><span class="pre">string</span></code>、<code class="docutils literal notranslate"><span class="pre">bytes</span></code> 和消息字段，<code class="docutils literal notranslate"><span class="pre">optional</span></code> 与 <code class="docutils literal notranslate"><span class="pre">repeated</span></code> 兼容。给出重复字段的序列化数据作为输入，如果是原始类型的字段，期望这个字段是 <code class="docutils literal notranslate"><span class="pre">optional</span></code> 客户端将采取最后的输入值，如果是消息类型的字段，将合并所有输入元素。请注意，这对于数字类型，包括 bool 和 <code class="docutils literal notranslate"><span class="pre">enum</span></code>，通常是不安全的。数字类型的重复字段可以用 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding#packed"><code class="docutils literal notranslate"><span class="pre">packed</span></code></a> 的格式进行序列化，当期望有一个 <code class="docutils literal notranslate"><span class="pre">optional</span></code> 字段时，这将不能被正确解析。</p></li>
+<li><p>改变默认值一般是可以的，只要你记住默认值是不会在 wire 发送的。因此，如果一个程序收到一个没有设置特定字段的消息，该程序将看到默认值，因为它是在该程序的协议版本中定义的。它不会看到发件人代码中定义的默认值。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code> 与 <code class="docutils literal notranslate"><span class="pre">int32</span></code>、<code class="docutils literal notranslate"><span class="pre">uint32</span></code>、<code class="docutils literal notranslate"><span class="pre">int64</span></code> 和 <code class="docutils literal notranslate"><span class="pre">uint64</span></code> 在 wire 格式上是兼容的（注意，如果数值不合适，会被截断），但是要注意，当消息被反序列化时，客户端代码可能会对它们进行不同的处理。值得注意的是，当消息被反序列化时，未被识别的 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 值会被丢弃，这使得字段的 <code class="docutils literal notranslate"><span class="pre">has..</span></code> 访问器返回 <code class="docutils literal notranslate"><span class="pre">false</span></code>，其 <code class="docutils literal notranslate"><span class="pre">getter</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 定义中列出的第一个值，或者默认值（如果指定了一个）。在重复 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 字段的情况下，任何未被识别的值都会从列表中剥离出来。然而，一个整数字段将始终保留其值。正因为如此，当把一个整数升级为 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 时，你需要非常小心，以免在电线上收到超界的 <code class="docutils literal notranslate"><span class="pre">enum</span></code> 值。</p></li>
+<li><p>将一个单一的可选值改成一个 <strong>new</strong>  <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的成员是安全的，而且二进制兼容。将多个可选字段移入一个新的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中可能是安全的，如果你确信没有代码同时设置多个字段的话。将任何字段移入一个现有的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中是不安全的。</p></li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2>未知字段<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<p>未知（Unknown）字段是格式良好的协议缓冲区序列化数据，代表解析器不认识的字段。例如，当一个旧的二进制文件解析一个新的二进制文件发送的带有新字段的数据时，这些新字段就成为旧二进制文件中的未知字段。</p>
+<p>最初，proto3 消息在解析过程中总是丢弃未知字段，但在 3.5 版本中，我们重新引入了对未知字段的保留，以匹配 proto2 行为。在 3.5 及以后的版本中，未知字段在解析过程中被保留，并包含在序列化的输出中。</p>
+</div>
+<div class="section" id="any">
+<h2>Any<a class="headerlink" href="#any" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Any</span></code> 消息类型让你把消息作为嵌入式类型使用，而不需要他们的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 定义。一个 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 包含一个任意的序列化消息的字节，以及一个作为全局唯一标识符的 URL，并解析为该消息的类型。要使用 Any 类型，你需要导入 <code class="docutils literal notranslate"><span class="pre">google/protobuf/any.proto</span></code>。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="s">&quot;google/protobuf/any.proto&quot;</span><span class="p">;</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ErrorStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="kd">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">repeated</span><span class="w"> </span><span class="n">google.protobuf.Any</span><span class="w"> </span><span class="na">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>给定消息类型的默认类型 URL 是 <code class="docutils literal notranslate"><span class="pre">type.googleapis.com/_packagename_._messagename_</span></code>。</p>
+<p>不同的语言实现将支持运行时库帮助器，以类型安全的方式打包和解压 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 值——例如，在 Java 中，<code class="docutils literal notranslate"><span class="pre">Any</span></code> 类型将有特殊的 <code class="docutils literal notranslate"><span class="pre">pack()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">unpack()</span></code> 访问器，而在 C++ 中有 <code class="docutils literal notranslate"><span class="pre">PackFrom()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">UnpackTo()</span></code> 方法。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Storing an arbitrary message type in Any.</span>
+<span class="n">NetworkErrorDetails</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="n">ErrorStatus</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="n">status</span><span class="p">.</span><span class="n">add_details</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">PackFrom</span><span class="p">(</span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Reading an arbitrary message from Any.</span>
+<span class="n">ErrorStatus</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Any</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">detail</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">status</span><span class="p">.</span><span class="n">details</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">detail</span><span class="p">.</span><span class="n">Is</span><span class="o">&lt;</span><span class="n">NetworkErrorDetails</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">NetworkErrorDetails</span><span class="w"> </span><span class="n">network_error</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">detail</span><span class="p">.</span><span class="n">UnpackTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">network_error</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">network_error</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>目前，用于处理 <code class="docutils literal notranslate"><span class="pre">Any</span></code> 类型的运行时库正在开发中。</p>
+<p>如果你已经熟悉了 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 的语法，<code class="docutils literal notranslate"><span class="pre">Any</span></code> 可以容纳任意的 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 消息，类似于 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 消息，可以允许 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/proto#extensions">扩展</a>。</p>
+</div>
+<div class="section" id="oneof">
+<h2>Oneof<a class="headerlink" href="#oneof" title="永久链接至标题">¶</a></h2>
+<p>如果你有一条有许多可选字段的消息，并且最多只有一个字段会同时被设置，你可以通过使用 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 功能来强制执行这一行为并节省内存。</p>
+<p><code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段和可选字段一样，只是 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的所有字段都共享内存，而且最多只能同时设置一个字段。设置 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的任何成员都会自动清除所有其他成员。你可以使用一个特殊的 <code class="docutils literal notranslate"><span class="pre">case()</span></code> 或 <code class="docutils literal notranslate"><span class="pre">WhichOneof()</span></code> 方法来检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的哪个值被设置了（如果有的话），这取决于你选择的语言。</p>
+<div class="section" id="id16">
+<h3>使用 Oneof<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<p>要在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 中定义一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code>，你要使用 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 关键字，后面跟着你的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 名称，在这里是 <code class="docutils literal notranslate"><span class="pre">test_oneof</span></code>：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">SampleMessage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">oneof</span><span class="w"> </span><span class="n">test_oneof</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SubMessage</span><span class="w"> </span><span class="na">sub_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后你将你的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段添加到 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 定义中。你可以添加任何类型的字段，除了 <code class="docutils literal notranslate"><span class="pre">map</span></code> 字段和 <code class="docutils literal notranslate"><span class="pre">repeated</span></code> 字段。</p>
+<p>在你生成的代码中，<code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段与普通的可选方法有相同的 <code class="docutils literal notranslate"><span class="pre">getters</span></code> 和 <code class="docutils literal notranslate"><span class="pre">setters</span></code>。你还会得到一个特殊的方法来检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的哪个值（如果有的话）被设置。你可以在相关的 API 参考资料中找到更多关于你所选语言的 oneof <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">API 的信息</a>。</p>
+</div>
+<div class="section" id="id17">
+<h3>Oneof 特征<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<p>设置一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段将自动清除 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的所有其他成员。因此，如果你设置了几个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段，只有你设置的最后一个字段仍然有一个值。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SampleMessage message;
+message.set_name(&quot;name&quot;);
+CHECK(message.has_name());
+message.mutable_sub_message();   // Will clear name field.
+CHECK(!message.has_name());
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>如果解析器在 wire 上遇到多个相同的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 成员，那么在解析的消息中只使用最后看到的成员。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneof</span></code> 不支持扩展。</p></li>
+<li><p>一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 不能被重复。</p></li>
+<li><p>反射 API 对 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段有效。</p></li>
+<li><p>如果你将一个 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段设置为默认值（例如将一个 <code class="docutils literal notranslate"><span class="pre">int32</span></code> 的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段设置为 <code class="docutils literal notranslate"><span class="pre">0</span></code>），该 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段的 “case” 将被设置，并且该值将在 wire 上被序列化。</p></li>
+<li><p>如果你使用 C++，确保你的代码不会导致内存崩溃。下面的示例代码会崩溃，因为 <code class="docutils literal notranslate"><span class="pre">sub_message</span></code> 已经通过调用 <code class="docutils literal notranslate"><span class="pre">set_name()</span></code> 方法被删除了。</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SampleMessage</span> <span class="n">message</span><span class="p">;</span>
+<span class="n">SubMessage</span><span class="o">*</span> <span class="n">sub_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">mutable_sub_message</span><span class="p">();</span>
+<span class="n">message</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>      <span class="o">//</span> <span class="n">Will</span> <span class="n">delete</span> <span class="n">sub_message</span>
+<span class="n">sub_message</span><span class="o">-&gt;</span><span class="n">set_</span><span class="o">...</span>            <span class="o">//</span> <span class="n">Crashes</span> <span class="n">here</span>
+</pre></div>
+</div>
+<p>同样在 C++ 中，如果你用 <code class="docutils literal notranslate"><span class="pre">oneofs</span></code> <code class="docutils literal notranslate"><span class="pre">Swap()</span></code> 两个消息，每个消息最后都会有对方的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 情况：在下面的例子中，<code class="docutils literal notranslate"><span class="pre">msg1</span></code> 会有一个 <code class="docutils literal notranslate"><span class="pre">sub_message</span></code>，<code class="docutils literal notranslate"><span class="pre">msg2</span></code> 会有一个名字。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SampleMessage</span> <span class="n">msg1</span><span class="p">;</span>
+<span class="n">msg1</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>
+<span class="n">SampleMessage</span> <span class="n">msg2</span><span class="p">;</span>
+<span class="n">msg2</span><span class="o">.</span><span class="n">mutable_sub_message</span><span class="p">();</span>
+<span class="n">msg1</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg2</span><span class="p">);</span>
+<span class="n">CHECK</span><span class="p">(</span><span class="n">msg1</span><span class="o">.</span><span class="n">has_sub_message</span><span class="p">());</span>
+<span class="n">CHECK</span><span class="p">(</span><span class="n">msg2</span><span class="o">.</span><span class="n">has_name</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>向后兼容的问题<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<p>在添加或删除 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 字段时要小心。如果检查 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的值返回 <code class="docutils literal notranslate"><span class="pre">None/NOT_SET</span></code>，这可能意味着 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 没有被设置，或者它被设置为不同版本的 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 中的一个字段。没有办法区分，因为没有办法知道线上的未知字段是否是 <code class="docutils literal notranslate"><span class="pre">oneof</span></code> 的成员。</p>
+<p><strong>标签重复使用问题</strong></p>
+<ul class="simple">
+<li><p><strong>将可选字段移入或移出一个 oneof</strong>：在消息被序列化和解析后，你可能会失去一些信息（一些字段会被清除）。然而，你可以安全地将一个字段移入一个新的 oneof 中，如果知道只有一个字段被设置的话，你也许可以移动多个字段。</p></li>
+<li><p><strong>删除一个 oneof 字段，然后把它加回来</strong>：这可能会在消息被序列化和解析后清除你当前设置的 oneof 字段。</p></li>
+<li><p><strong>拆分或合并 oneof</strong>：这与移动普通的可选字段有类似的问题。</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="maps">
+<span id="id19"></span><h2>Maps<a class="headerlink" href="#maps" title="永久链接至标题">¶</a></h2>
+<p>如果你想创建一个关联映射作为数据定义的一部分，协议缓冲区提供了一个方便的快捷语法。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">&lt;</span><span class="n">key_type</span><span class="p">,</span><span class="w"> </span><span class="n">value_type</span><span class="p">&gt;</span><span class="w"> </span><span class="na">map_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>…其中 <code class="docutils literal notranslate"><span class="pre">key_type</span></code> 可以是任何积分或字符串类型（所以，除了浮点类型和字节之外的任何标量类型）。请注意，<code class="docutils literal notranslate"><span class="pre">enum</span></code> 不是有效的 <code class="docutils literal notranslate"><span class="pre">key_type</span></code>。<code class="docutils literal notranslate"><span class="pre">value_type</span></code> 可以是任何类型，除了另一个 <code class="docutils literal notranslate"><span class="pre">map</span></code>。</p>
+<p>因此，例如，如果你想创建一个项目 <code class="docutils literal notranslate"><span class="pre">map</span></code>，其中每个 <code class="docutils literal notranslate"><span class="pre">Project</span></code> 信息与一个字符串键相关联，你可以这样定义它。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Project</span><span class="p">&gt;</span><span class="w"> </span><span class="na">projects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Map fields cannot be <code class="docutils literal notranslate"><span class="pre">repeated</span></code>.</p></li>
+<li><p>Wire format ordering and map iteration ordering of map values is undefined, so you cannot rely on your map items being in a particular order.</p></li>
+<li><p>When generating text format for a <code class="docutils literal notranslate"><span class="pre">.proto</span></code>, maps are sorted by key. Numeric keys are sorted numerically.</p></li>
+<li><p>When parsing from the wire or when merging, if there are duplicate map keys the last key seen is used. When parsing a map from text format, parsing may fail if there are duplicate keys.</p></li>
+<li><p>If you provide a key but no value for a map field, the behavior when the field is serialized is language-dependent. In C++, Java, Kotlin, and Python the default value for the type is serialized, while in other languages nothing is serialized.</p></li>
+</ul>
+<p>生成的 map API 目前可用于所有 proto3 支持的语言。你可以在相关的 API 参考中找到更多关于你所选语言的 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/overview">map API</a>。</p>
+<div class="section" id="map">
+<h3>map 特征<a class="headerlink" href="#map" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>不支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的扩展。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> 不能重复、可选、或必须。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> 值的 wire 格式排序和 <code class="docutils literal notranslate"><span class="pre">map</span></code> 迭代排序是未定义的，所以你不能依赖你的 <code class="docutils literal notranslate"><span class="pre">map</span></code> 项目在一个特定的顺序。</p></li>
+<li><p>在为 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 生成文本格式时， <code class="docutils literal notranslate"><span class="pre">map</span></code> 是按键排序的。数值键是按数字排序的。</p></li>
+<li><p>当从 wire 上解析或合并时，如果有重复的 <code class="docutils literal notranslate"><span class="pre">map</span></code> 键，则使用最后看到的键。当从文本格式解析一个 <code class="docutils literal notranslate"><span class="pre">map</span></code> 时，如果有重复的键，解析可能会失败。</p></li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3>向后兼容<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">map</span></code> 语法等同于电线上的以下内容，所以不支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的协议缓冲区实现仍然可以处理你的数据。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">MapFieldEntry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">key_type</span><span class="w"> </span><span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">value_type</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">repeated</span><span class="w"> </span><span class="n">MapFieldEntry</span><span class="w"> </span><span class="na">map_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>任何支持 <code class="docutils literal notranslate"><span class="pre">map</span></code> 的协议缓冲区实现都必须同时产生和接受可以被上述定义接受的数据。</p>
+</div>
+</div>
+<div class="section" id="id21">
+<h2>包<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h2>
+<p>你可以在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中添加一个可选的包指定器，以防止协议消息类型之间的名称冲突。</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">foo</span><span class="o">.</span><span class="n">bar</span><span class="p">;</span>
+<span class="kd">message</span><span class="w"> </span><span class="nc">Open</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>然后你可以在定义你的消息类型的字段时使用包指定器：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">...</span>
+<span class="w">  </span><span class="n">foo.bar.Open</span><span class="w"> </span><span class="na">open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>包指定符影响生成代码的方式取决于你选择的语言。</p>
+<ul class="simple">
+<li><p>在 C++ 中，生成的类被包裹在一个 C++ 命名空间中。例如，<code class="docutils literal notranslate"><span class="pre">Open</span></code> 将被放在命名空间 <code class="docutils literal notranslate"><span class="pre">foo::bar</span></code> 中。</p></li>
+<li><p>在 Java 中，除非你在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中明确地提供一个选项 <code class="docutils literal notranslate"><span class="pre">java_package</span></code>，否则包将作为 Java 包使用。</p></li>
+<li><p>在 Python 中，包指令被忽略，因为 Python 模块是根据它们在文件系统中的位置来组织的。</p></li>
+<li><p>在 Go 中，包指令被忽略，生成的 <code class="docutils literal notranslate"><span class="pre">.pb.go</span></code> 文件在以相应的 <code class="docutils literal notranslate"><span class="pre">go_proto_library</span></code> 规则命名的包中。</p></li>
+</ul>
+<p>即使包指令不直接影响生成的代码，例如在 Python 中，仍然强烈建议为 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件指定包，否则可能导致描述符中的命名冲突，并使 proto 在其他语言中无法移植。</p>
+<div class="section" id="id22">
+<h3>包和名称解析<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<p>在协议缓冲区语言中，类型名称解析的工作方式与 C++ 类似：首先搜索最内层的范围，然后是下一个最内层的范围，以此类推，每个包都被认为是其父包的 “内部”。前面的’.’（例如，<code class="docutils literal notranslate"><span class="pre">.foo.bar.Baz</span></code>）意味着要从最外层的范围开始。</p>
+<p>协议缓冲区编译器通过解析导入的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件来解决所有的类型名称。每种语言的代码生成器知道如何引用该语言中的每个类型，即使它有不同的范围规则。</p>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>定义服务<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h2>
+<p>如果你想在 RPC（远程过程调用）系统中使用你的消息类型，你可以在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义一个 RPC 服务接口，协议缓冲区编译器将用你选择的语言生成服务接口代码和存根。因此，举例来说，如果你想定义一个 RPC 服务的方法，该方法接收你的 <code class="docutils literal notranslate"><span class="pre">SearchRequest</span></code> 并返回 <code class="docutils literal notranslate"><span class="pre">SearchResponse</span></code>，你可以在你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义它，如下：</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">service</span><span class="w"> </span><span class="n">SearchService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">rpc</span><span class="w"> </span><span class="n">Search</span><span class="p">(</span><span class="n">SearchRequest</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">SearchResponse</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>默认情况下，协议编译器将生成一个名为 <code class="docutils literal notranslate"><span class="pre">SearchService</span></code> 的抽象接口和一个相应的 “stub” 实现。存根将所有调用转发到 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code>，而 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code> 又是一个抽象接口，你必须根据自己的 RPC 系统来定义。例如，你可以实现一个 <code class="docutils literal notranslate"><span class="pre">RpcChannel</span></code>，它将消息序列化并通过 HTTP 将其发送到服务器。换句话说，生成的存根为进行基于协议缓冲区的 RPC 调用提供了一个类型安全的接口，而不会将你锁定在任何特定的 RPC 实现中。因此，在 C++ 中，你可能最终会得到这样的代码：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">protobuf</span><span class="o">::</span><span class="n">RpcChannel</span><span class="o">*</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span><span class="w"></span>
+<span class="n">protobuf</span><span class="o">::</span><span class="n">RpcController</span><span class="o">*</span><span class="w"> </span><span class="n">controller</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchService</span><span class="o">*</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchRequest</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="n">SearchResponse</span><span class="w"> </span><span class="n">response</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">DoSearch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// You provide classes MyRpcChannel and MyRpcController, which implement</span>
+<span class="w">  </span><span class="c1">// the abstract interfaces protobuf::RpcChannel and protobuf::RpcController.</span>
+<span class="w">  </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRpcChannel</span><span class="p">(</span><span class="s">&quot;somehost.example.com:1234&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRpcController</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// The protocol compiler generates the SearchService class based on the</span>
+<span class="w">  </span><span class="c1">// definition given above.</span>
+<span class="w">  </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SearchService</span><span class="o">::</span><span class="n">Stub</span><span class="p">(</span><span class="n">channel</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Set up the request.</span>
+<span class="w">  </span><span class="n">request</span><span class="p">.</span><span class="n">set_query</span><span class="p">(</span><span class="s">&quot;protocol buffers&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Execute the RPC.</span>
+<span class="w">  </span><span class="n">service</span><span class="o">-&gt;</span><span class="n">Search</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">protobuf</span><span class="o">::</span><span class="n">NewCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Done</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Done</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">controller</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>所有的服务类也都实现了服务接口，它提供了一种调用特定方法的方法，而不需要在编译时知道方法的名称或其输入和输出类型。在服务器端，这可以用来实现一个 RPC 服务器，你可以用它来注册服务。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">google</span><span class="o">::</span><span class="n">protobuf</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExampleSearchService</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">SearchService</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w"> </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">Search</span><span class="p">(</span><span class="n">protobuf</span><span class="o">::</span><span class="n">RpcController</span><span class="o">*</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="n">SearchRequest</span><span class="o">*</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">SearchResponse</span><span class="o">*</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">protobuf</span><span class="o">::</span><span class="n">Closure</span><span class="o">*</span><span class="w"> </span><span class="n">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">query</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;google&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">response</span><span class="o">-&gt;</span><span class="n">add_result</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_url</span><span class="p">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">query</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;protocol buffers&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">response</span><span class="o">-&gt;</span><span class="n">add_result</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_url</span><span class="p">(</span><span class="s">&quot;http://protobuf.googlecode.com&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">done</span><span class="o">-&gt;</span><span class="n">Run</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// You provide class MyRpcServer.  It does not have to implement any</span>
+<span class="w">  </span><span class="c1">// particular interface; this is just an example.</span>
+<span class="w">  </span><span class="n">MyRpcServer</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">protobuf</span><span class="o">::</span><span class="n">Service</span><span class="o">*</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExampleSearchService</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">server</span><span class="p">.</span><span class="n">ExportOnPort</span><span class="p">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">server</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>如果你不想插入你自己现有的 RPC 系统，你现在可以使用 <a class="reference external" href="https://github.com/grpc/grpc-common">gRPC</a>：一个在 Google 开发的语言和平台中立的开源 RPC 系统。gRPC 在协议缓冲区方面工作得特别好，让你使用一个特殊的协议缓冲区编译器插件直接从你的 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件生成相关的 RPC 代码。然而，由于用 <code class="docutils literal notranslate"><span class="pre">proto2</span></code> 和 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 生成的客户端和服务器之间存在潜在的兼容性问题，我们建议你使用 <code class="docutils literal notranslate"><span class="pre">proto3</span></code> 来定义 gRPC 服务。</p>
+<p>除了 gRPC 之外，还有一些正在进行的第三方项目，为协议缓冲区开发 RPC 实现。关于我们所知道的项目的链接列表，请参见<a class="reference external" href="https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md">第三方附加组件 wiki 页面</a>。</p>
+</div>
+<div class="section" id="id24">
+<h2>选项<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中的单个声明可以用一些选项进行注释。选项并不改变声明的整体含义，但可能会影响它在特定情况下的处理方式。可用选项的完整列表在 <code class="docutils literal notranslate"><span class="pre">google/protobuf/descriptor.proto</span></code> 中定义。</p>
+<p>有些选项是文件级的选项，意味着它们应该写在顶层范围内，而不是在任何消息、枚举或服务定义内。有些选项是消息级的，意味着它们应该写在消息定义中。有些选项是字段级的，意思是它们应该写在字段定义里面。选项也可以写在枚举类型、枚举值、oneof 字段、服务类型和服务方法上；然而，目前没有任何有用的选项存在于这些方面。</p>
+<p>下面是几个最常用的选项：</p>
+</div>
+<div class="section" id="id25">
+<h2>生成你的类<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<p>为了生成你需要的 Java、Python 或 C++ 代码来处理 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件中定义的消息类型，你需要在 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 上运行协议缓冲区编译器 <code class="docutils literal notranslate"><span class="pre">protoc</span></code>。</p>
+<p>协议编译器的调用方法如下：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>protoc --proto_path<span class="o">=</span>IMPORT_PATH --cpp_out<span class="o">=</span>DST_DIR --java_out<span class="o">=</span>DST_DIR --python_out<span class="o">=</span>DST_DIR --go_out<span class="o">=</span>DST_DIR --ruby_out<span class="o">=</span>DST_DIR --objc_out<span class="o">=</span>DST_DIR --csharp_out<span class="o">=</span>DST_DIR path/to/file.proto
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMPORT_PATH</span></code> 指定了一个在解析导入指令时寻找 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的目录。如果省略，将使用当前目录。可以通过多次传递 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 选项来指定多个导入目录；它们将被按顺序搜索。<code class="docutils literal notranslate"><span class="pre">-IIMPORT_PATH</span></code> 可以作为 <code class="docutils literal notranslate"><span class="pre">--proto_path</span></code> 的缩写形式。</p></li>
+<li><p>你可以提供一个或多个输出指令：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--cpp_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">C++</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/cpp-generated">C++ 生成的代码参考</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--java_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">Java</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/java-generated">Java 生成的代码参考</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--python_out</span></code> 在 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 中生成 <code class="docutils literal notranslate"><span class="pre">Python</span></code> 代码。更多内容请参见 <a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/reference/python-generated">Python 生成的代码参考</a>。</p></li>
+</ul>
+<p>作为一种额外的便利，如果 <code class="docutils literal notranslate"><span class="pre">DST_DIR</span></code> 以 <code class="docutils literal notranslate"><span class="pre">.zip</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.jar</span></code> 结尾，编译器将把输出写入一个给定名称的 <code class="docutils literal notranslate"><span class="pre">ZIP</span></code> 格式的归档文件。如果输出档案已经存在，它将被覆盖。编译器不够聪明，无法将文件添加到现有的存档中。</p>
+</li>
+<li><p>你必须提供一个或多个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件作为输入。可以同时指定多个 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件。尽管这些文件是相对于当前目录命名的，但每个文件都必须位于 <code class="docutils literal notranslate"><span class="pre">IMPORT_PATH</span></code> 之中，以便编译器能够确定其标准名称。</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "xinetzone/protobuf-book",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./start"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section">
+   
+</div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title">简介</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="proto2.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">概述</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      通过 xinetzone<br/>
+    
+        &copy; 版权 2021, xinetzone.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
