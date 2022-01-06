@@ -108,20 +108,29 @@ message Foo {
 
 ![](images/type.png)
 
-## 可选字段和默认值
+## 默认值
 
-如上所述，消息描述中的元素可以被标记为 `optional`。一个格式良好的消息可能包含也可能不包含可选元素。当一条消息被解析时，如果它不包含一个可选元素，解析对象中的相应字段就会被设置为该字段的默认值。默认值可以作为消息描述的一部分来指定。例如，假设你想为 `SearchRequest` 的 `result_per_page` 值提供一个 10 的默认值。
+当消息被解析时，如果编码后的消息不包含一个特定的 `singular` 元素，解析后的对象中的相应字段就会被设置为该字段的默认值。这些默认值是特定类型的：
 
-```proto
-optional int32 result_per_page = 3 [default = 10];
+- 对于字符串，默认值是空字符串。
+- 对于字节，默认值是空的字节字符串。
+- 对于 Bools，默认值是 `false`。
+- 对于数字类型，默认值是 `0`。
+- 对于枚举，默认值是枚举的类型定义中列出的第一个值。
+- 对于消息字段，该字段不被设置。它的确切值是取决于语言的。详见 [代码生成指南](https://developers.google.cn/protocol-buffers/docs/reference/overview)。
+
+`repeated` 字段的默认值是空的（一般是相应语言中的空列表）。
+
+```{hint}
+请注意，对于标量消息字段，一旦消息被解析，就没有办法知道一个字段是否被明确地设置为默认值（例如，一个布尔值是否被设置为 `false`）或者根本就没有被设置：在定义你的消息类型时，你应该记住这一点。例如，如果你不希望某些行为在默认情况下发生，那么就不要设置一个布尔值，当它被设置为 `false` 时，就会开启某些行为。还要注意的是，如果一个标量消息字段被设置为默认值，那么该值将不会在 wire 上被序列化。
 ```
-
-如果没有为一个可选元素指定默认值，则会使用一个特定类型的默认值：对于字符串，默认值是空字符串。对于字节，默认值是空的字节字符串。对于 Bools，默认值是false。对于数字类型，默认值是 0。对于枚举，默认值是枚举的类型定义中列出的第一个值。这意味着在向枚举值列表的开头添加一个值时必须小心。关于如何安全地改变定义的指南，请参见 [更新消息类型](#updating) 部分。
 
 (enum)=
 ## 枚举
 
-当你定义一个消息类型时，你可能希望它的一个字段只具有预定义的值列表中的一个。例如，假设你想为每个 `SearchRequest` 添加一个 `corpus` 字段，语料库可以是`UNIVERSAL`、`WEB`、`IMAGES`、`LOCAL`、`NEWS`、`PRODUCTS` 或 `VIDEO`。你可以通过在你的消息定义中添加一个 `enum` 来实现这个目的：一个具有 `enum` 类型的字段只能有一组指定的常数作为它的值（如果你试图提供一个不同的值，解析器会把它当作一个未知的字段）。在下面的例子中，我们添加了一个名为 `Corpus` 的 `enum`，其中包含所有可能的值，还有一个 `Corpus` 类型的字段。
+当你定义一个消息类型时，你可能希望它的一个字段只具有预定义的值列表中的一个。例如，假设你想为每个 `SearchRequest` 添加一个 `corpus` 字段，`corpus` 可以是 `UNIVERSAL`、`WEB`、`IMAGES`、`LOCAL`、`NEWS`、`PRODUCTS` 或 `VIDEO`。你可以通过在你的消息定义中添加一个 `enum` 来实现这个目的：一个具有 `enum` 类型的字段只能有一组指定的常数作为它的值（如果你试图提供一个不同的值，解析器会把它当作一个未知的字段）。
+
+在下面的例子中，我们添加了一个名为 `Corpus` 的 `enum`，其中包含所有可能的值，还有一个 `Corpus` 类型的字段。
 
 ```proto
 message SearchRequest {
@@ -166,13 +175,15 @@ message MyMessage2 {
 }
 ```
 
-枚举器常量必须在 32 位整数的范围内。由于枚举值在 wire 上使用 `varint` 编码，负值的效率很低，因此不推荐使用。你可以在一个消息定义中定义枚举，就像上面的例子一样，也可以在外面定义——这些枚举可以在你的 `.proto` 文件中的任何消息定义中重复使用。你也可以使用语法 `_MessageType_._EnumType_`，将一条消息中声明的枚举类型作为另一条消息中的字段类型。
+枚举器常量必须在 32 位整数的范围内。由于枚举值在 wire 上使用 [`varint` 编码](https://developers.google.cn/protocol-buffers/docs/encoding)，负值的效率很低，因此不推荐使用。你可以在一个消息定义中定义枚举，就像上面的例子一样，也可以在外面定义——这些枚举可以在你的 `.proto` 文件中的任何消息定义中重复使用。你也可以使用语法 `_MessageType_._EnumType_`，将一条消息中声明的枚举类型作为另一条消息中的字段类型。
 
 当你在一个使用枚举的 `.proto` 上运行协议缓冲区编译器时，生成的代码对于 Java 或 C++ 将有一个相应的枚举，或者对于 Python 有一个特殊的 `EnumDescriptor` 类，用来在运行时生成的类中创建一组具有整数值的符号常量。
 
 ```{caution}
 生成的代码可能会受到特定语言对枚举器数量的限制（一种语言低至数千）。请查看你计划使用的语言的限制。
 ```
+
+在反序列化过程中，未被识别的枚举值将被保留在消息中，尽管当消息被反序列化时如何表示是取决于语言的。在支持开放枚举类型的语言中，其值超出了指定的符号范围，如 C++ 和 Go，未知的枚举值被简单地存储为其基础的整数表示。在具有封闭枚举类型的语言中，如 Java，枚举中的一个案例被用来表示一个未被识别的值，而底层的整数可以用特殊的访问器来访问。在这两种情况下，如果消息被序列化，未被识别的值仍将与消息一起被序列化。
 
 关于如何在你的应用程序中使用消息枚举的更多信息，请参阅你 [所选语言的生成代码](https://developers.google.cn/protocol-buffers/docs/reference/overview) 指南。
 
@@ -426,25 +437,17 @@ map<key_type, value_type> map_field = N;
 map<string, Project> projects = 3;
 ```
 
-- Map fields cannot be `repeated`.
-- Wire format ordering and map iteration ordering of map values is undefined, so you cannot rely on your map items being in a particular order.
-- When generating text format for a `.proto`, maps are sorted by key. Numeric keys are sorted numerically.
-- When parsing from the wire or when merging, if there are duplicate map keys the last key seen is used. When parsing a map from text format, parsing may fail if there are duplicate keys.
-- If you provide a key but no value for a map field, the behavior when the field is serialized is language-dependent. In C++, Java, Kotlin, and Python the default value for the type is serialized, while in other languages nothing is serialized.
-
-生成的 map API 目前可用于所有 proto3 支持的语言。你可以在相关的 API 参考中找到更多关于你所选语言的 [map API](https://developers.google.cn/protocol-buffers/docs/reference/overview)。
-
-### map 特征
-
-- 不支持 `map` 的扩展。
-- `map` 不能重复、可选、或必须。
+- `map` 字段不能是 `repeated`。
 - `map` 值的 wire 格式排序和 `map` 迭代排序是未定义的，所以你不能依赖你的 `map` 项目在一个特定的顺序。
 - 在为 `.proto` 生成文本格式时， `map` 是按键排序的。数值键是按数字排序的。
 - 当从 wire 上解析或合并时，如果有重复的 `map` 键，则使用最后看到的键。当从文本格式解析一个 `map` 时，如果有重复的键，解析可能会失败。
+- 如果你为一个 `map` 字段提供了一个键，但没有提供值，当字段被序列化时，其行为是与语言有关的。在 C++、Java、Kotlin 和 Python 中，该类型的默认值会被序列化，而在其他语言中，什么都不会被序列化。
+
+生成的 map API 目前可用于所有 proto3 支持的语言。你可以在相关的 API 参考中找到更多关于你所选语言的 [map API](https://developers.google.cn/protocol-buffers/docs/reference/overview)。
 
 ### 向后兼容
 
-`map` 语法等同于电线上的以下内容，所以不支持 `map` 的协议缓冲区实现仍然可以处理你的数据。
+`map` 语法等同于 wire 上的以下内容，所以不支持 `map` 的协议缓冲区实现仍然可以处理你的数据。
 
 ```proto
 message MapFieldEntry {

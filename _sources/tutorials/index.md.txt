@@ -7,7 +7,6 @@
 ```{toctree}
 :maxdepth: 3
 
-python
+use
 python-generated
-cpp
 ```

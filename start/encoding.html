@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/default.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
@@ -39,6 +43,7 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script kind="utterances">
 
@@ -90,45 +95,13 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="技术" href="techniques.html" />
-    <link rel="prev" title="概述" href="proto2.html" /> 
+    <link rel="prev" title="概述" href="proto2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh_CN">
     
 
     <!-- Google Analytics -->
-     
-<link
-  rel="alternate"
-  type="application/atom+xml"
-  href="../posts/atom.xml"
-  title="Blog"
-/>
- 
-<style type="text/css">
-  ul.ablog-archive {
-    list-style: none;
-    overflow: auto;
-    margin-left: 0px;
-  }
-  ul.ablog-archive li {
-    float: left;
-    margin-right: 5px;
-    font-size: 80%;
-  }
-  ul.postlist a {
-    font-style: italic;
-  }
-  ul.postlist-style-disc {
-    list-style-type: disc;
-  }
-  ul.postlist-style-none {
-    list-style-type: none;
-  }
-  ul.postlist-style-circle {
-    list-style-type: circle;
-  }
-</style>
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
@@ -171,6 +144,11 @@ commentsRunWhenDOMLoaded(addUtterances);
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="install.html">
+     安装
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="intro.html">
      简介
     </a>
@@ -208,18 +186,13 @@ commentsRunWhenDOMLoaded(addUtterances);
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../tutorials/python.html">
-     Python 接口
+    <a class="reference internal" href="../tutorials/use.html">
+     Python/C++ 接口
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../tutorials/python-generated.html">
      Python 生成
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tutorials/cpp.html">
-     C++ 接口
     </a>
    </li>
   </ul>
@@ -370,19 +343,20 @@ commentsRunWhenDOMLoaded(addUtterances);
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>编码</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
-                <div>
-                    <h2> 导航 </h2>
-                </div>
-                <nav aria-label="Page">
-                    <ul class="visible nav section-nav flex-column">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>编码</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 导航 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
    简单消息
@@ -400,11 +374,14 @@ commentsRunWhenDOMLoaded(addUtterances);
  </li>
 </ul>
 
-                </nav>
+                        </nav>
+                    </div>
+                </div>
             </div>
             
               <div>
-                 <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1>编码<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>参考：<a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding">消息二进制格式</a></p>
 <p>本文档描述了协议缓冲区消息的二进制 wire 格式。你不需要了解这个来在你的应用程序中使用协议缓冲区，但是了解不同的协议缓冲区格式如何影响你的编码信息的大小是非常有用的。</p>
@@ -471,94 +448,11 @@ commentsRunWhenDOMLoaded(addUtterances);
     }
     </script>
     <script>kernelName = 'python3'</script>
-<div class="section">
-   
-</div>
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                 <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>编码<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>参考：<a class="reference external" href="https://developers.google.cn/protocol-buffers/docs/encoding">消息二进制格式</a></p>
-<p>本文档描述了协议缓冲区消息的二进制 wire 格式。你不需要了解这个来在你的应用程序中使用协议缓冲区，但是了解不同的协议缓冲区格式如何影响你的编码信息的大小是非常有用的。</p>
-<div class="section" id="id2">
-<h2>简单消息<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>假设你有以下非常简单的消息定义。</p>
-<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span><span class="w"> </span><span class="nc">Test1</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">optional</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>在一个应用程序中，你创建了一个 <code class="docutils literal notranslate"><span class="pre">Test1</span></code> 消息并将 <code class="docutils literal notranslate"><span class="pre">a</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">150</span></code>。然后你将消息序列化到一个输出流。如果你能够检查编码后的消息，你会看到三个字节。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">08</span> <span class="mi">96</span> <span class="mi">01</span>
-</pre></div>
-</div>
-<p>到目前为止，这么小的数字 - 但它意味着什么呢？继续阅读…</p>
-</div>
-<div class="section" id="base-128-varints">
-<h2>Base 128 Varints<a class="headerlink" href="#base-128-varints" title="永久链接至标题">¶</a></h2>
-<p>为了理解你的简单协议缓冲区编码，你首先需要理解 varints。Varints 是一种使用一个或多个字节来序列化整数的方法。较小的数字需要较少的字节数。</p>
-<p>除了最后一个字节外，varint中的每个字节都设置了最有意义的位（most significant bit，msb）—— 这表明还有更多的字节要来。每个字节的低 7 位用于存储数字的二补表示，以 7 位为一组，最小有效位在前。</p>
-<p>因此，例如，这里是数字 1 - 这是一个单字节，所以 msb 没有设置：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0000</span> <span class="mi">0001</span>
-</pre></div>
-</div>
-<p>而这里是 300 ——这有点复杂：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1010</span> <span class="mi">1100</span> <span class="mi">0000</span> <span class="mi">0010</span>
-</pre></div>
-</div>
-<p>你如何计算出这是 300 呢？首先，你去掉每个字节的 msb，因为这只是为了告诉我们是否已经到达了数字的末尾（正如你所看到的，它被设置在第一个字节，因为 varint 中不止一个字节）。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 1010 1100 0000 0010
-→ 010 1100  000 0010
-</pre></div>
-</div>
-<p>你把两组 7 位倒过来，因为正如你所记得的，VARINTS 存储数字时，先存储最不重要的一组。然后你把它们连接起来，得到你的最终值。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>000 0010  010 1100
-→  000 0010 ++ 010 1100
-→  100101100
-→  256 + 32 + 8 + 4 = 300
-</pre></div>
-</div>
-</div>
-<div class="section" id="id3">
-<h2>消息结构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-</div>
-</div>
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "xinetzone/protobuf-book",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            kernelName: "python3",
-            path: "./start"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
-<div class="section">
-   
-</div>
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="proto2.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
@@ -575,7 +469,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">

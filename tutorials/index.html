@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/default.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
@@ -39,6 +43,7 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script kind="utterances">
 
@@ -89,46 +94,14 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="shortcut icon" href="../_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Python 接口" href="python.html" />
-    <link rel="prev" title="技术" href="../start/techniques.html" /> 
+    <link rel="next" title="Python/C++ 接口" href="use.html" />
+    <link rel="prev" title="技术" href="../start/techniques.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh_CN">
     
 
     <!-- Google Analytics -->
-     
-<link
-  rel="alternate"
-  type="application/atom+xml"
-  href="../posts/atom.xml"
-  title="Blog"
-/>
- 
-<style type="text/css">
-  ul.ablog-archive {
-    list-style: none;
-    overflow: auto;
-    margin-left: 0px;
-  }
-  ul.ablog-archive li {
-    float: left;
-    margin-right: 5px;
-    font-size: 80%;
-  }
-  ul.postlist a {
-    font-style: italic;
-  }
-  ul.postlist-style-disc {
-    list-style-type: disc;
-  }
-  ul.postlist-style-none {
-    list-style-type: none;
-  }
-  ul.postlist-style-circle {
-    list-style-type: circle;
-  }
-</style>
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
@@ -171,6 +144,11 @@ commentsRunWhenDOMLoaded(addUtterances);
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../start/install.html">
+     安装
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../start/intro.html">
      简介
     </a>
@@ -208,18 +186,13 @@ commentsRunWhenDOMLoaded(addUtterances);
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="python.html">
-     Python 接口
+    <a class="reference internal" href="use.html">
+     Python/C++ 接口
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="python-generated.html">
      Python 生成
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="cpp.html">
-     C++ 接口
     </a>
    </li>
   </ul>
@@ -347,42 +320,45 @@ commentsRunWhenDOMLoaded(addUtterances);
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>教程</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>教程</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
             </div>
             
               <div>
-                 <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1>教程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>本节中的每个教程都向你展示了如何在你喜欢的语言中使用协议缓冲区实现一个简单的应用程序，向你介绍该语言的协议缓冲区API，并向你展示创建和使用 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的基本知识。还提供了每个应用程序的完整示例代码。</p>
 <p>这些教程并不假定你对协议缓冲区有任何了解，但假定你能自如地用你选择的语言编写代码，包括使用文件 I/O。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="python.html">Python 接口</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id1">为什么使用协议缓冲区？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id2">哪里可以找到示例代码</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id3">定义协议格式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id4">编译协议缓冲区</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#protocol-buffer-api">Protocol Buffer API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id5">枚举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id6">标准信息方法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id7">解析和序列化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use.html">Python/C++ 接口</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id1">为什么使用协议缓冲区？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id2">哪里可以找到示例代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id3">定义协议格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id4">编译协议缓冲区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#protocol-buffer-api">Protocol Buffer API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="use.html#id5">枚举</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use.html#id6">标准信息方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use.html#id7">解析和序列化</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#message">编写 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id8">阅读 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id9">扩展协议缓冲区</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id10">高级用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#message">编写 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id8">阅读 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#proto2">扩展协议缓冲区（proto2）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use.html#id9">高级用法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="python-generated.html">Python 生成</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cpp.html">C++ 接口</a></li>
 </ul>
 </div>
 </div>
@@ -406,75 +382,11 @@ commentsRunWhenDOMLoaded(addUtterances);
     }
     </script>
     <script>kernelName = 'python3'</script>
-<div class="section">
-   
-</div>
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                 <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>教程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>本节中的每个教程都向你展示了如何在你喜欢的语言中使用协议缓冲区实现一个简单的应用程序，向你介绍该语言的协议缓冲区API，并向你展示创建和使用 <code class="docutils literal notranslate"><span class="pre">.proto</span></code> 文件的基本知识。还提供了每个应用程序的完整示例代码。</p>
-<p>这些教程并不假定你对协议缓冲区有任何了解，但假定你能自如地用你选择的语言编写代码，包括使用文件 I/O。</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="python.html">Python 接口</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id1">为什么使用协议缓冲区？</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id2">哪里可以找到示例代码</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id3">定义协议格式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id4">编译协议缓冲区</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#protocol-buffer-api">Protocol Buffer API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id5">枚举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id6">标准信息方法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="python.html#id7">解析和序列化</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#message">编写 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id8">阅读 <code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id9">扩展协议缓冲区</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python.html#id10">高级用法</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="python-generated.html">Python 生成</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cpp.html">C++ 接口</a></li>
-</ul>
-</div>
-</div>
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "xinetzone/protobuf-book",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            kernelName: "python3",
-            path: "./tutorials"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
-<div class="section">
-   
-</div>
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="../start/techniques.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
@@ -483,15 +395,15 @@ commentsRunWhenDOMLoaded(addUtterances);
             <p class="prev-next-title">技术</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="python.html" title="下一页 页">
+    <a class='right-next' id="next-link" href="use.html" title="下一页 页">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">Python 接口</p>
+        <p class="prev-next-title">Python/C++ 接口</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
