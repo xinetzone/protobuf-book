@@ -3,6 +3,7 @@
 ```{toctree}
 :maxdepth: 3
 
+install
 intro
 proto3
 proto2
